@@ -1,4 +1,4 @@
-Shows exact health of creatures on [i]mouse-over[/i].
+Shows exact health of creatures on [i]mouse-over[/i] and [i]controller-auto-target[/i].
 This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST).
 
 ================
@@ -8,11 +8,18 @@ v1.1 - Fixed Issues when using it with a Language Pack (tested only on Russian L
 v1.2 - Fixed clients crashed upon joining a game.
 v1.2.1 - Fixed mouse over not showing when equiping on hand slot.
 v1.3 - Fixed hover message showing incorrectly for certain specific actions (e.g cooking). Added configuration to select either Value or Percentage or Both. And changed the icon :D
+v1.3.1 - Fixed crash due to a missing file (i was testing something, sorry).
+v1.4.0 - Added support for controller. Also added option to use different Modes.
+v1.4.1 - Fixed crash issues when trying to plant/build something when using Mode A.
+v1.4.2 - Add a 'NaN' check before updating health numbers.
+v1.4.3 - Optimize the mod (now properly check if the entity actually have health before adding the healthinfo).
+v1.4.4 - Fixed issues on v1.4.3. Also removed Modes as it doesn't seems to serve any _real_ benefits.
 
 ================
 [h1]Credits[/h1]
 star
 Dr.Weresmu, leif_krummenacher, Vanguard Prime, Space [for bug report :)]
+Anyone else that I forget to mention.
 
 ================
 [h1]Sources[/h1]
