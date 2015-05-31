@@ -342,23 +342,35 @@ end)
 AddPrefabPostInitAny(function(inst)
 	if inst.components.healthinfo == nil then
 		if  inst:HasTag("hive") or 
-				inst:HasTag("eyeturret") or 
-				inst:HasTag("houndmound") or 
-				inst:HasTag("ghost") or 
-				inst:HasTag("insect") or 
-				inst:HasTag("spider") or
-				inst:HasTag("chess") or 
-				inst:HasTag("mech") or
-				inst:HasTag("mound") or
-				inst:HasTag("shadow") or
-				inst:HasTag("tree") or
-				inst:HasTag("veggie") or
-				inst:HasTag("shell") or
-				inst:HasTag("rocky") or
-				inst:HasTag("smallcreature") or
-				inst:HasTag("largecreature") or
-				inst:HasTag("wall") then
-			inst:AddComponent("healthinfo")
+			inst:HasTag("eyeturret") or 
+			inst:HasTag("houndmound") or 
+			inst:HasTag("ghost") or 
+			inst:HasTag("insect") or 
+			inst:HasTag("spider") or
+			inst:HasTag("chess") or 
+			inst:HasTag("mech") or
+			inst:HasTag("mound") or
+			inst:HasTag("shadow") or
+			inst:HasTag("tree") or
+			inst:HasTag("veggie") or
+			inst:HasTag("shell") or
+			inst:HasTag("rocky") or
+			inst:HasTag("smallcreature") or
+			inst:HasTag("largecreature") or
+			inst:HasTag("wall") or
+			inst:HasTag("character") or
+			inst:HasTag("companion") or
+			inst:HasTag("glommer") or
+			inst:HasTag("animal") or
+			inst:HasTag("monster") or
+			inst:HasTag("prey") or
+			inst:HasTag("scarytoprey") or
+			inst:HasTag("player") 
+									then
+
+			if inst.components.healthinfo ~= nil then
+				inst:AddComponent("healthinfo")
+			end
 			if inst.components.health then
 				GetHealth(inst)
 			end

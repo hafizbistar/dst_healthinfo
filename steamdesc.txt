@@ -1,5 +1,5 @@
-Shows exact health of creatures on [i]mouse-over[/i] and [i]controller-auto-target[/i].
-This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST).
+Shows exact health of creatures on [i]mouse-over[/i] and [i]controller-auto-target[/i]. This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST).
+Now also in [url=https://github.com/hafizbistar/dst_healthinfo]GitHub[/url].
 
 ================
 [h1]Patchlist[/h1]
