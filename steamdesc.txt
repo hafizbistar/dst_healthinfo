@@ -14,6 +14,7 @@ v1.4.1 - Fixed crash issues when trying to plant/build something when using Mode
 v1.4.2 - Add a 'NaN' check before updating health numbers.
 v1.4.3 - Optimize the mod (now properly check if the entity actually have health before adding the healthinfo).
 v1.4.4 - Fixed issues on v1.4.3. Also removed Modes as it doesn't seems to serve any _real_ benefits.
+v1.4.5 - Added more check tags for other entities that should also display health.
 
 ================
 [h1]Credits[/h1]

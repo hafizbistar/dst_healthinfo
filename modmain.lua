@@ -368,9 +368,7 @@ AddPrefabPostInitAny(function(inst)
 			inst:HasTag("player") 
 									then
 
-			if inst.components.healthinfo ~= nil then
-				inst:AddComponent("healthinfo")
-			end
+			inst:AddComponent("healthinfo")
 			if inst.components.health then
 				GetHealth(inst)
 			end
