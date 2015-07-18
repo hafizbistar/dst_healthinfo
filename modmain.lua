@@ -256,7 +256,7 @@ AddGlobalClassPostConstruct('widgets/controls', 'Controls', function(self)
 					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ATTACK) .. " " .. GLOBAL.STRINGS.UI.HUD.ATTACK)
 					attack_shown = true
 				end
-				if self.owner:CanExamine() then
+				if self.owner.CanExamine == nil or self.owner:CanExamine() then
 					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_INSPECT) .. " " .. GLOBAL.STRINGS.UI.HUD.INSPECT)
 				end
 				if l ~= nil then

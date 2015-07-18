@@ -15,6 +15,7 @@ v1.4.2 - Add a 'NaN' check before updating health numbers.
 v1.4.3 - Optimize the mod (now properly check if the entity actually have health before adding the healthinfo).
 v1.4.4 - Fixed issues on v1.4.3. Also removed Modes as it doesn't seems to serve any _real_ benefits.
 v1.4.5 - Added more check tags for other entities that should also display health.
+v1.4.6 - Fixed controller crashing issue (recent update)
 
 ================
 [h1]Credits[/h1]
