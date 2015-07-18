@@ -16,6 +16,7 @@ v1.4.3 - Optimize the mod (now properly check if the entity actually have health
 v1.4.4 - Fixed issues on v1.4.3. Also removed Modes as it doesn't seems to serve any _real_ benefits.
 v1.4.5 - Added more check tags for other entities that should also display health.
 v1.4.6 - Fixed controller crashing issue (recent update)
+v1.4.7 - Added a new option to choose the block style.
 
 ================
 [h1]Credits[/h1]

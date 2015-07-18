@@ -3,6 +3,7 @@ local TheInput = GLOBAL.TheInput
 local ThePlayer = GLOBAL.ThePlayer
 local IsServer = GLOBAL.TheNet:GetIsServer()
 local show_type = GetModConfigData("show_type")
+local divider = GetModConfigData("divider")
 
 -- for key,value in pairs(GLOBAL.EQUIPSLOTS) do print('4r',key,value) end
 
@@ -12,17 +13,34 @@ function GetHealth(e)
 		local h=e.components.health
 		local mx=math.floor(h.maxhealth-h.minhealth)
 		local cur=math.floor(h.currenthealth-h.minhealth)
+		local ds = ""
+		local de = ""
 
-		local i,j = string.find(str, " [", nil, true)
-		if i ~= nil and i > 1 then str = string.sub(str, 1, (i-1)) end
+		if divider == 1 then
+			ds = "-"
+			de = "-"
+		elseif divider == 2 then
+			ds = "["
+			de = "]"
+		elseif divider == 3 then
+			ds = "("
+			de = ")"
+		elseif divider == 4 then
+			ds = "{"
+			de = "}"
+		elseif divider == 5 then
+			ds = "<"
+			de = ">"
+		end
+
 
 		if type( mx ) == "number" and type( cur ) == "number" then
 			if show_type == 0 then
-				str = "["..cur.." / "..mx .."]"
+				str = ds..cur.." / "..mx ..de
 			elseif show_type == 1 then
-				str = "["..math.floor(cur*100/mx).."%]"
+				str = ds..math.floor(cur*100/mx).."%"..de
 			else
-				str = "["..cur.." / "..mx .." "..math.floor(cur*100/mx).."%]"
+				str = ds..cur.." / "..mx .." "..math.floor(cur*100/mx).."%"..de
 			end
 		end
 
