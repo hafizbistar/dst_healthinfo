@@ -5,9 +5,9 @@ local _G=GLOBAL
 local require = GLOBAL.require
 local TheNet = _G.rawget(_G,"TheNet")
 local show_type = GetModConfigData("show_type")
-local divider, ds, de = GetModConfigData("divider")
-local ds = {"-","[","(","{","<"} ds=ds[divider]
-local de = {"-","]",")","}",">"} de=de[divider]
+local divider = GetModConfigData("divider")
+local ds = {"-","[","(","{","<"} ds=ds[divider or 0] or ""
+local de = {"-","]",")","}",">"} de=de[divider or 0] or ""
 
 local SHOULD_OVERWRITE_ACTION = nil
 
@@ -85,7 +85,7 @@ if TheNet == nil then
 		end
 		return name
 	end)
-	
+
 	return --EXIT THE MOD if this is DS version.
 end
 
@@ -113,13 +113,13 @@ local function BlackFilter(inst)
 end
 
 local function WhiteFilter(inst)
-	if  inst:HasTag("hive") or 
-		inst:HasTag("eyeturret") or 
-		inst:HasTag("houndmound") or 
-		inst:HasTag("ghost") or 
-		inst:HasTag("insect") or 
+	if  inst:HasTag("hive") or
+		inst:HasTag("eyeturret") or
+		inst:HasTag("houndmound") or
+		inst:HasTag("ghost") or
+		inst:HasTag("insect") or
 		inst:HasTag("spider") or
-		inst:HasTag("chess") or 
+		inst:HasTag("chess") or
 		inst:HasTag("mech") or
 		inst:HasTag("mound") or
 		inst:HasTag("shadow") or
@@ -137,7 +137,7 @@ local function WhiteFilter(inst)
 		inst:HasTag("monster") or
 		inst:HasTag("prey") or
 		inst:HasTag("scarytoprey") or
-		inst:HasTag("player") 
+		inst:HasTag("player")
 	then
 		--print(inst.prefab.." - WhiteList")
 		return true

@@ -2,7 +2,7 @@
 name = "Health Info"
 author = "xVars"
 forumthread = ""
-version = "2.0.0"
+version = "2.0.1"
 description = "v"..version.."\nShows exact health of creatures on mouse-over or controller auto-target. This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST)."
 
 api_version = 6
