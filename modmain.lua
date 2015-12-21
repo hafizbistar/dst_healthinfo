@@ -1,395 +1,263 @@
+------------------------ PART I -------------------------
+------------------------ Common -------------------------
+--- DS? DST? Host? Dedicated? Who know??
+local _G=GLOBAL
 local require = GLOBAL.require
-local TheInput = GLOBAL.TheInput
-local ThePlayer = GLOBAL.ThePlayer
-local IsServer = GLOBAL.TheNet:GetIsServer()
+local TheNet = _G.rawget(_G,"TheNet")
 local show_type = GetModConfigData("show_type")
-local divider = GetModConfigData("divider")
+local divider, ds, de = GetModConfigData("divider")
+local ds = {"-","[","(","{","<"} ds=ds[divider]
+local de = {"-","]",")","}",">"} de=de[divider]
 
--- for key,value in pairs(GLOBAL.EQUIPSLOTS) do print('4r',key,value) end
+local SHOULD_OVERWRITE_ACTION = nil
 
-function GetHealth(e)  
-	if e ~= nil and e.components ~= nil and e.components.health and e.components.healthinfo then
-		local str = e.components.healthinfo.text
-		local h=e.components.health
-		local mx=math.floor(h.maxhealth-h.minhealth)
-		local cur=math.floor(h.currenthealth-h.minhealth)
-		local ds = ""
-		local de = ""
-
-		if divider == 1 then
-			ds = "-"
-			de = "-"
-		elseif divider == 2 then
-			ds = "["
-			de = "]"
-		elseif divider == 3 then
-			ds = "("
-			de = ")"
-		elseif divider == 4 then
-			ds = "{"
-			de = "}"
-		elseif divider == 5 then
-			ds = "<"
-			de = ">"
+local function AddString(name,cur,mx) --cur and mx are float!
+	if type(name) == "string" then
+		if show_type == 0 then
+			name = name.." "..ds..math.floor(cur+0.5).." / "..math.floor(mx+0.5) ..de -- +0.5 means round fn
+		elseif show_type == 1 then
+			name = name.." "..ds..math.floor(cur*100/(mx or 1)+0.5).."%"..de
+		else
+			name = name.." "..ds..math.floor(cur+0.5).." / "..math.floor(mx+0.5) .." "..math.floor(cur*100/(mx or 1)+0.5).."%"..de
 		end
+	end
+	return name
+end
 
 
-		if type( mx ) == "number" and type( cur ) == "number" then
-			if show_type == 0 then
-				str = ds..cur.." / "..mx ..de
-			elseif show_type == 1 then
-				str = ds..math.floor(cur*100/mx).."%"..de
-			else
-				str = ds..cur.." / "..mx .." "..math.floor(cur*100/mx).."%"..de
-			end
-		end
-
-		if e.components.healthinfo then
-			e.components.healthinfo:SetText(str)
-		end
+--Small easy tech function for injection
+local function InjectFull(comp,fn_name,fn)
+	--print("Full Inject: ",tostring(comp),tostring(fn_name),tostring(fn))
+	local old = comp[fn_name]
+	comp[fn_name] = function(self,...)
+		local res = old(self,...)
+		return fn(res,self,...)
 	end
 end
 
-AddClassPostConstruct("components/health_replica", function(self)
-	self.SetCurrent = function(self, current)
-		GetHealth(self.inst)
-		if self.classified ~= nil then
-			self.classified:SetValue("currenthealth", current)
-		end
+local controller = require "components/playercontroller"
+InjectFull(controller,"GetLeftMouseAction",function(lmb)
+	if not lmb then
+		return lmb
 	end
+	if not(lmb.target and lmb.invobject == nil and lmb.target ~= lmb.doer) then
+		--No DisplayName. We should add info in lmb:GetActionString().
+		SHOULD_OVERWRITE_ACTION = true
+	end
+	return lmb
 end)
 
-AddGlobalClassPostConstruct('widgets/hoverer', 'HoverText', function(self)
-	self.OnUpdate = function(self)
-		local using_mouse = self.owner.components and self.owner.components.playercontroller:UsingMouse()
-
-		if using_mouse ~= self.shown then
-			if using_mouse then
-				self:Show()
-			else
-				self:Hide()
-			end
-		end
-
-		if not self.shown then
-			return
-		end
-
-		local str = nil
-		if self.isFE == false then
-			str = self.owner.HUD.controls:GetTooltip() or self.owner.components.playercontroller:GetHoverTextOverride()
-		else
-			str = self.owner:GetTooltip()
-		end
-
-		local secondarystr = nil
-
-		local lmb = nil
-		if not str and self.isFE == false then
-			lmb = self.owner.components.playercontroller:GetLeftMouseAction()
-			if lmb then
-
-				str = lmb:GetActionString()
-
-				if lmb.target and lmb.invobject == nil and lmb.target ~= lmb.doer then
-					local name = lmb.target:GetDisplayName() or (lmb.target.components.named and lmb.target.components.named.name)
-				--if lmb.target and lmb.target ~= lmb.doer then
-				--	local name = lmb.target:GetDisplayName() or (lmb.target.components.named and lmb.target.components.named.name)
-
-
-					if name then
-						local adjective = lmb.target:GetAdjective()
-
-						if adjective then
-							str = str.. " " .. adjective .. " " .. name
-						else
-							str = str.. " " .. name
-						end
-
-						if lmb.target.replica.stackable ~= nil and lmb.target.replica.stackable:IsStack() then
-							str = str .. " x" .. tostring(lmb.target.replica.stackable:StackSize())
-						end
-						if lmb.target.components.inspectable and lmb.target.components.inspectable.recordview and lmb.target.prefab then
-							GLOBAL.ProfileStatsSet(lmb.target.prefab .. "_seen", true)
-						end
-					end
-				end
-
-				if lmb.target and lmb.target ~= lmb.doer and lmb.target.components and lmb.target.components.healthinfo and lmb.target.components.healthinfo.text ~= '' then
-					local name = lmb.target:GetDisplayName() or (lmb.target.components.named and lmb.target.components.named.name) or ""
-					local i,j = string.find(str, " " .. name, nil, true)
-					if i ~= nil and i > 1 then str = string.sub(str, 1, (i-1)) end
-					str = str.. " " .. name .. " " .. lmb.target.components.healthinfo.text
-				end
-			end
-			local rmb = self.owner.components.playercontroller:GetRightMouseAction()
-			if rmb then
-				secondarystr = GLOBAL.STRINGS.RMB .. ": " .. rmb:GetActionString()
-			end
-		end
-
-		if str then
-			if self.strFrames == nil then self.strFrames = 1 end
-
-			if self.str ~= self.lastStr then
-				--print("new string")
-				self.lastStr = self.str
-				self.strFrames = SHOW_DELAY
-			else
-				self.strFrames = self.strFrames - 1
-				if self.strFrames <= 0 then
-					if lmb and lmb.target and lmb.target:HasTag("player") then
-						self.text:SetColour(lmb.target.playercolour)
-					else
-						self.text:SetColour(1,1,1,1)
-					end
-					self.text:SetString(str)
-					self.text:Show()
-				end
-			end
-		else
-			self.text:Hide()
-		end
-
-		if secondarystr then
-			YOFFSETUP = -80
-			YOFFSETDOWN = -50
-			self.secondarytext:SetString(secondarystr)
-			self.secondarytext:Show()
-		else
-			self.secondarytext:Hide()
-		end
-
-		local changed = (self.str ~= str) or (self.secondarystr ~= secondarystr)
-		self.str = str
-		self.secondarystr = secondarystr
-		if changed then
-			local pos = TheInput:GetScreenPosition()
-			self:UpdatePosition(pos.x, pos.y)
-		end
-	end
+--Clear overwriting info (just for sure)
+InjectFull(controller,"GetRightMouseAction",function(res)
+	SHOULD_OVERWRITE_ACTION = nil
+	return res
+end)
+InjectFull(controller,"DoAction",function(res)
+	SHOULD_OVERWRITE_ACTION = nil
+	return res --j
 end)
 
-AddGlobalClassPostConstruct('widgets/controls', 'Controls', function(self)
-	local original_OnUpdate = self.OnUpdate
-	self.OnUpdate = function(self)
-		-- original_OnUpdate(self)
-		if PerformingRestart then
-			self.playeractionhint:SetTarget(nil)
-			self.playeractionhint_itemhighlight:SetTarget(nil)
-			self.attackhint:SetTarget(nil)
-			self.groundactionhint:SetTarget(nil)
-			return
-		end
-
-		local controller_mode = TheInput:ControllerAttached()
-		local controller_id = TheInput:GetControllerID()
-
-		if controller_mode then
-			self.mapcontrols:Hide()
-		else
-			self.mapcontrols:Show()
-		end
-
-		for k,v in pairs(self.containers) do
-			if v.should_close_widget then
-				self.containers[k] = nil
-				v:Kill()
+--local b_action = require "bufferedaction"
+InjectFull(_G.BufferedAction,"GetActionString",function(str,self)
+	if SHOULD_OVERWRITE_ACTION then
+		if self.target then
+			if TheNet ~= nil and self.target.health_info then
+				--print("OVERWRITE (TheNet)")
+				str = AddString(str,self.target.health_info,self.target.health_info_max)
+			elseif TheNet == nil and self.target.components.health then
+				--print("OVERWRITE (DS)")
+				str = AddString(str,self.target.components.health.currenthealth,self.target.components.health.maxhealth)
 			end
 		end
-
-		if self.demotimer then
-			if GLOBAL.IsGamePurchased() then
-				self.demotimer:Kill()
-				self.demotimer = nil
-			end
-		end
-
-		local shownItemIndex = nil
-		local itemInActions = false		-- the item is either shown through the actionhint or the groundaction
-
-		if controller_mode and not (self.inv.open or self.crafttabs.controllercraftingopen) and self.owner:IsActionsVisible() then
-
-			local ground_l, ground_r = self.owner.components.playercontroller:GetGroundUseAction()
-			local ground_cmds = {}
-			if self.owner.components.playercontroller.deployplacer or self.owner.components.playercontroller.placer then
-				local placer = self.terraformplacer
-
-				if self.owner.components.playercontroller.deployplacer then
-					self.groundactionhint:Show()
-					self.groundactionhint:SetTarget(self.owner.components.playercontroller.deployplacer)
-
-					if self.owner.components.playercontroller.deployplacer.components.placer.can_build then
-						if TheInput:ControllerAttached() then
-							self.groundactionhint.text:SetString(TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ACTION) .. " " .. self.owner.components.playercontroller.deployplacer.components.placer:GetDeployAction():GetActionString().."\n"..TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ALTACTION).." "..GLOBAL.STRINGS.UI.HUD.CANCEL)
-						else
-							self.groundactionhint.text:SetString(TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ACTION) .. " " .. self.owner.components.playercontroller.deployplacer.components.placer:GetDeployAction():GetActionString())
-						end
-
-					else
-						self.groundactionhint.text:SetString("")
-					end
-
-				elseif self.owner.components.playercontroller.placer then
-					self.groundactionhint:Show()
-					self.groundactionhint:SetTarget(self.owner)
-					self.groundactionhint.text:SetString(TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ACTION) .. " " .. GLOBAL.STRINGS.UI.HUD.BUILD.."\n" .. TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ALTACTION) .. " " .. GLOBAL.STRINGS.UI.HUD.CANCEL.."\n")
-				end
-			elseif ground_r ~= nil then
-				self.groundactionhint:Show()
-				self.groundactionhint:SetTarget(self.owner)
-				table.insert(ground_cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ALTACTION) .. " " .. ground_r:GetActionString())
-				self.groundactionhint.text:SetString(table.concat(ground_cmds, "\n"))
-			else
-				self.groundactionhint:Hide()
-			end
-
-			local attack_shown = false
-			local controller_target = self.owner.components.playercontroller:GetControllerTarget()
-			local controller_attack_target = self.owner.components.playercontroller:GetControllerAttackTarget()
-			if controller_target ~= nil then
-				local cmds = {}
-				local textblock = self.playeractionhint.text
-				if self.groundactionhint.shown and GLOBAL.distsq(self.owner:GetPosition(), controller_target:GetPosition()) < 1.33 then
-					--You're close to your target so we should combine the two text blocks.
-					cmds = ground_cmds
-					textblock = self.groundactionhint.text
-					self.playeractionhint:Hide()
-					itemInActions = false
-				else
-					self.playeractionhint:Show()
-					self.playeractionhint:SetTarget(controller_target)
-					itemInActions = true
-				end
-
-				local l, r = self.owner.components.playercontroller:GetSceneItemControllerAction(controller_target)
-				-- table.insert(cmds, " ")
-				shownItemIndex = #cmds
-				local health = ""
-				if controller_target and controller_target.components and controller_target.components.healthinfo and controller_target.components.healthinfo.text ~= '' then
-					health = controller_target.components.healthinfo.text
-				end
-				table.insert(cmds, controller_target:GetDisplayName() .. " " ..health)
-				if controller_target == controller_attack_target then
-					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ATTACK) .. " " .. GLOBAL.STRINGS.UI.HUD.ATTACK)
-					attack_shown = true
-				end
-				if self.owner.CanExamine == nil or self.owner:CanExamine() then
-					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_INSPECT) .. " " .. GLOBAL.STRINGS.UI.HUD.INSPECT)
-				end
-				if l ~= nil then
-					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ACTION) .. " " .. l:GetActionString())
-				end
-				if r ~= nil and ground_r == nil then
-					table.insert(cmds, TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ALTACTION) .. " " .. r:GetActionString())
-				end
-
-				textblock:SetString(table.concat(cmds, "\n"))
-			else
-				self.playeractionhint:Hide()
-				self.playeractionhint:SetTarget(nil)
-			end
-
-			if controller_attack_target ~= nil and not attack_shown then
-				self.attackhint:Show()
-				self.attackhint:SetTarget(controller_attack_target)
-				local health = ""
-				if controller_attack_target and controller_attack_target.components and controller_attack_target.components.healthinfo and controller_attack_target.components.healthinfo.text ~= '' then
-					health = controller_attack_target:GetDisplayName() .. " " .. controller_attack_target.components.healthinfo.text
-				end
-
-				self.attackhint.text:SetString(TheInput:GetLocalizedControl(controller_id, GLOBAL.CONTROL_CONTROLLER_ATTACK) .. " " .. GLOBAL.STRINGS.UI.HUD.ATTACK .. " " .. health)
-			else
-				self.attackhint:Hide()
-				self.attackhint:SetTarget(nil)
-			end
-		else
-			self.attackhint:Hide()
-			self.attackhint:SetTarget(nil)
-
-			self.playeractionhint:Hide()
-			self.playeractionhint:SetTarget(nil)
-
-			self.groundactionhint:Hide()
-			self.groundactionhint:SetTarget(nil)
-		end
-
-		--default offsets
-		self.playeractionhint:SetScreenOffset(0,0)
-		self.attackhint:SetScreenOffset(0,0)
-
-		--if we are showing both hints, make sure they don't overlap
-		if self.attackhint.shown and self.playeractionhint.shown then
-
-			local w1, h1 = self.attackhint.text:GetRegionSize()
-			local x1, y1 = self.attackhint:GetPosition():Get()
-			--print (w1, h1, x1, y1)
-
-			local w2, h2 = self.playeractionhint.text:GetRegionSize()
-			local x2, y2 = self.playeractionhint:GetPosition():Get()
-			--print (w2, h2, x2, y2)
-
-			local sep = (x1 + w1/2) < (x2 - w2/2) or
-						(x1 - w1/2) > (x2 + w2/2) or
-						(y1 + h1/2) < (y2 - h2/2) or
-						(y1 - h1/2) > (y2 + h2/2)
-
-			if not sep then
-				local a_l = x1 - w1/2
-				local a_r = x1 + w1/2
-
-				local p_l = x2 - w2/2
-				local p_r = x2 + w2/2
-
-				if math.abs(p_r - a_l) < math.abs(p_l - a_r) then
-					local d = (p_r - a_l) + 20
-					self.attackhint:SetScreenOffset(d/2,0)
-					self.playeractionhint:SetScreenOffset(-d/2,0)
-				else
-					local d = (a_r - p_l) + 20
-					self.attackhint:SetScreenOffset( -d/2,0)
-					self.playeractionhint:SetScreenOffset(d/2,0)
-				end
-			end
-		end
-
-		self:HighlightActionItem(shownItemIndex, itemInActions)
+		SHOULD_OVERWRITE_ACTION = nil
 	end
+	return str
 end)
 
+
+-------------Mini code for DS version------------
+if TheNet == nil then
+	--print("THIS IS SINGLE DS VERSION")
+	InjectFull(_G.EntityScript,"GetDisplayName",function(name,inst)
+		local comp = inst.components.health or inst.components.boathealth
+		if comp ~= nil then
+			name = AddString(name,comp.currenthealth,comp.maxhealth)
+		end
+		return name
+	end)
+	
+	return --EXIT THE MOD if this is DS version.
+end
+
+---------------------------- PART II -----------------------
+---------------------------- Only DST ----------------------
+-- Client? Server? Who knows?
+
+
+local IsServer = TheNet:GetIsServer()
+local IsDedicated = TheNet:IsDedicated()
+--print("IS_SERVER = "..tostring(IsServer))
+--print("IS_DEDICATED = "..tostring(IsDedicated))
+
+--Very fast decisions.
+local BLACK_FILTER_CACHED = {nil,nil,nil,nil,nil,nil,nil,nil,nil,} --no add health_info
+local WHITE_FILTER_CACHED = {nil,nil,nil,nil,nil,nil,nil,nil,nil,} --always add health_info
+
+--Our cool filters with black Jack
+
+local function BlackFilter(inst)
+	if not (inst.Network ~= nil and inst.Transform ~= nil) then --and inst.prefab == "spider") then
+		--print(inst.prefab.." - now in BLACKLIST")
+		return true
+	end
+end
+
+local function WhiteFilter(inst)
+	if  inst:HasTag("hive") or 
+		inst:HasTag("eyeturret") or 
+		inst:HasTag("houndmound") or 
+		inst:HasTag("ghost") or 
+		inst:HasTag("insect") or 
+		inst:HasTag("spider") or
+		inst:HasTag("chess") or 
+		inst:HasTag("mech") or
+		inst:HasTag("mound") or
+		inst:HasTag("shadow") or
+		inst:HasTag("tree") or
+		inst:HasTag("veggie") or
+		inst:HasTag("shell") or
+		inst:HasTag("rocky") or
+		inst:HasTag("smallcreature") or
+		inst:HasTag("largecreature") or
+		inst:HasTag("wall") or
+		inst:HasTag("character") or
+		inst:HasTag("companion") or
+		inst:HasTag("glommer") or
+		inst:HasTag("animal") or
+		inst:HasTag("monster") or
+		inst:HasTag("prey") or
+		inst:HasTag("scarytoprey") or
+		inst:HasTag("player") 
+	then
+		--print(inst.prefab.." - WhiteList")
+		return true
+	end
+end
+
+--We need to decide to add or not to add health_info net variable BEFORE initialization.
+--TRUE if we need health_info.
+local function CheckInstHasHealth(inst)
+	--Check for cached tables.
+	if BLACK_FILTER_CACHED[inst.prefab] ~= nil then
+		--print("already in black list")
+		return
+	end
+	if WHITE_FILTER_CACHED[inst.prefab] ~= nil then
+		return true
+	end
+	--Try to analyse via our cool filters.
+	if BlackFilter(inst) then
+		BLACK_FILTER_CACHED[inst.prefab] = true
+		return
+	end
+	if WhiteFilter(inst) then
+		WHITE_FILTER_CACHED[inst.prefab] = true
+		return true
+	end
+	--All filter are passed without any result! That's too bad!
+	--Decision for ALL unknown prefabs:
+	--print("DEFAULT DECISION: "..inst.prefab.." - BLACK LIST")
+	BLACK_FILTER_CACHED[inst.prefab] = true
+	--Test health component.
+	if inst.components.health or inst.components.boathealth then --ERROR! Can't synchronize it without updating the mod!
+		print("----------------- HEALTH INFO WARNING ------------------")
+		print("Prefab: "..tostring(inst.prefab).." has health component!")
+		print("The mod should be fixed to support this prefab.")
+		print("Please, show this log message to author of Mod Info mod.")
+		print("--------------------------------------------------------")
+	end
+end
+
+--Two dirty client functions
+local function OnHealthInfoDirty(inst)
+    inst.health_info = inst.net_health_info:value()
+end
+local function OnHealthInfoMaxDirty(inst)
+    inst.health_info_max = inst.net_health_info_max:value()
+end
+
+--[[
+local function debug_log(inst,mess)
+	if inst.prefab == "rabbit" then
+		print(inst.prefab,mess)
+	end
+end
+--]]
+
+--Initialization of all prefabs.
 AddPrefabPostInitAny(function(inst)
-	if inst.components.healthinfo == nil then
-		if  inst:HasTag("hive") or 
-			inst:HasTag("eyeturret") or 
-			inst:HasTag("houndmound") or 
-			inst:HasTag("ghost") or 
-			inst:HasTag("insect") or 
-			inst:HasTag("spider") or
-			inst:HasTag("chess") or 
-			inst:HasTag("mech") or
-			inst:HasTag("mound") or
-			inst:HasTag("shadow") or
-			inst:HasTag("tree") or
-			inst:HasTag("veggie") or
-			inst:HasTag("shell") or
-			inst:HasTag("rocky") or
-			inst:HasTag("smallcreature") or
-			inst:HasTag("largecreature") or
-			inst:HasTag("wall") or
-			inst:HasTag("character") or
-			inst:HasTag("companion") or
-			inst:HasTag("glommer") or
-			inst:HasTag("animal") or
-			inst:HasTag("monster") or
-			inst:HasTag("prey") or
-			inst:HasTag("scarytoprey") or
-			inst:HasTag("player") 
-									then
-
-			inst:AddComponent("healthinfo")
-			if inst.components.health then
-				GetHealth(inst)
-			end
-		end
+	--print("NEW PREFAB - ",inst)
+	--print("already in white list")
+	if CheckInstHasHealth(inst) == nil then
+		--debug_log(inst,"Bad prefab")
+		return --Do not add health_info!
+	end
+	inst.health_info = 0
+	inst.health_info_max = 0 --should be exact 0 because we will check it later if it's not zero.
+	inst.net_health_info = _G.net_ushortint(inst.GUID, "health_info", "health_info_dirty")
+	inst.net_health_info_max = _G.net_ushortint(inst.GUID, "health_info_max", "health_info_max_dirty")
+	if not IsDedicated then
+		--Means client OR host.
+		--debug_log(inst,"not dedicated")
+		inst:ListenForEvent("health_info_dirty", OnHealthInfoDirty)
+		inst:ListenForEvent("health_info_max_dirty", OnHealthInfoMaxDirty)
+	end
+	if not _G.TheWorld.ismastersim then
+		--Meand only client.
+		--debug_log(inst,"ismastersim, return")
+		return
+	end
+	--Only server code...
+	if inst.components.health then
+		--debug_log(inst,"has health "..tostring(inst.components.health.currenthealth).." "..tostring(inst.components.health.maxhealth))
+		inst.net_health_info:set(inst.components.health.currenthealth)
+		inst.net_health_info_max:set(inst.components.health.maxhealth)
 	end
 end)
+
+--Inject in DisplayName dunction
+InjectFull(_G.EntityScript,"GetDisplayName",function(name,self)
+	if self.health_info_max ~= nil and self.health_info_max ~= 0 then
+		name = AddString(name,self.health_info,self.health_info_max)
+	end
+	return name
+end)
+
+-----Only Server Side -----
+if not IsServer then
+	return
+end
+
+--------------------------------- PART III ------------------------------
+------------------------- Only Server Side code -------------------------
+
+
+local health = require "components/health"
+InjectFull(health,"SetCurrentHealth",function(aaa,self)
+	--print("Set health = "..tostring(self.currenthealth))
+	if self.inst.health_info ~= nil then
+		self.inst.net_health_info:set(self.currenthealth)
+	end
+end)
+InjectFull(health,"SetMaxHealth",function(aaa,self)
+	if self.inst.health_info ~= nil then
+		self.inst.net_health_info:set(self.currenthealth)
+		self.inst.net_health_info_max:set(self.maxhealth)
+	end
+end)
+InjectFull(health,"DoDelta",function(aaa,self)
+	if self.inst.health_info ~= nil then
+		self.inst.net_health_info:set(self.currenthealth)
+	end
+end)
+

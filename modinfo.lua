@@ -2,11 +2,11 @@
 name = "Health Info"
 author = "xVars"
 forumthread = ""
-description = "v1.4.7\nShows exact health of creatures on mouse-over or controller auto-target. This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST)."
-version = "1.4.7"
+version = "2.0.0"
+description = "v"..version.."\nShows exact health of creatures on mouse-over or controller auto-target. This mod is inspired by Tell Me About Health (DS) which was ported to Tell Me (DST)."
 
-
-api_version = 10
+api_version = 6
+api_version_dst = 10
 
 --This lets the clients know that they need to download the mod before they can join a server that is using it.
 all_clients_require_mod = true
@@ -18,13 +18,16 @@ client_only_mod = false
 dont_starve_compatible = true
 reign_of_giants_compatible = true
 dst_compatible = true
+shipwrecked_compatible = true
 
 --These tags allow the server running this mod to be found with filters from the server listing screen
-server_filter_tags = {"health"}
+server_filter_tags = {"healthinfo"}
 
 -- custom icon
 icon_atlas = "preview.xml"
 icon = "preview.tex"
+
+priority = 0.00375859599 --DST unique id
 
 
 configuration_options =
