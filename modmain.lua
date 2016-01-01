@@ -121,10 +121,10 @@ local function WhiteFilter(inst)
 		inst:HasTag("spider") or
 		inst:HasTag("chess") or
 		inst:HasTag("mech") or
-		inst:HasTag("mound") or
+		--inst:HasTag("mound") or
 		inst:HasTag("shadow") or
-		inst:HasTag("tree") or
-		inst:HasTag("veggie") or
+		--inst:HasTag("tree") or
+		--inst:HasTag("veggie") or
 		inst:HasTag("shell") or
 		inst:HasTag("rocky") or
 		inst:HasTag("smallcreature") or
