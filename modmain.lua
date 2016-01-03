@@ -113,7 +113,8 @@ local function BlackFilter(inst)
 end
 
 local function WhiteFilter(inst)
-	if  inst:HasTag("hive") or
+	if  (
+		inst:HasTag("hive") or
 		inst:HasTag("eyeturret") or
 		inst:HasTag("houndmound") or
 		inst:HasTag("ghost") or
@@ -138,6 +139,10 @@ local function WhiteFilter(inst)
 		inst:HasTag("prey") or
 		inst:HasTag("scarytoprey") or
 		inst:HasTag("player")
+		) and not
+		(
+			inst:HasTag("yamche")
+		)
 	then
 		--print(inst.prefab.." - WhiteList")
 		return true
