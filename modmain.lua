@@ -4,15 +4,22 @@
 local _G=GLOBAL
 local require = GLOBAL.require
 local TheNet = _G.rawget(_G,"TheNet")
-local show_type = GetModConfigData("show_type")
-local divider = GetModConfigData("divider")
-local ds = {"-","[","(","{","<"} ds=ds[divider or 0] or ""
-local de = {"-","]",")","}",">"} de=de[divider or 0] or ""
+local show_type = _G.tonumber(GetModConfigData("show_type")) or 0
+local divider = _G.tonumber(GetModConfigData("divider")) or 0
+local ds = {"-","[","(","{","<"} ds=ds[divider] or ""
+local de = {"-","]",")","}",">"} de=de[divider] or ""
+
+
+local type_patterns = { "%d+%%", "%d+ / %d+ %d+%%" }; type_patterns[0] = "%d+ / %d+"
+local CUT_PATTERN = "^(.*) "..(ds~="" and "%"..ds or "")..tostring(type_patterns[show_type])..(de~="" and "%"..de or "").."$"
+print("Health Info Pattern: "..CUT_PATTERN)
 
 local SHOULD_OVERWRITE_ACTION = nil
 
+local DISABLE_HELATHINFO_RECURSIVE = 0 --Must be disabled if > 0
+
 local function AddString(name,cur,mx) --cur and mx are float!
-	if type(name) == "string" then
+	if DISABLE_HELATHINFO_RECURSIVE == 0 and type(name) == "string" then
 		if show_type == 0 then
 			name = name.." "..ds..math.floor(cur+0.5).." / "..math.floor(mx+0.5) ..de -- +0.5 means round fn
 		elseif show_type == 1 then
@@ -60,7 +67,7 @@ end)
 --local b_action = require "bufferedaction"
 InjectFull(_G.BufferedAction,"GetActionString",function(str,self)
 	if SHOULD_OVERWRITE_ACTION then
-		if self.target then
+		if self.target and DISABLE_HELATHINFO_RECURSIVE == 0 then
 			if TheNet ~= nil and self.target.health_info then
 				--print("OVERWRITE (TheNet)")
 				str = AddString(str,self.target.health_info,self.target.health_info_max)
@@ -92,7 +99,6 @@ end
 ---------------------------- PART II -----------------------
 ---------------------------- Only DST ----------------------
 -- Client? Server? Who knows?
-
 
 local IsServer = TheNet:GetIsServer()
 local IsDedicated = TheNet:IsDedicated()
@@ -233,13 +239,17 @@ AddPrefabPostInitAny(function(inst)
 	end
 end)
 
---Inject in DisplayName dunction
-InjectFull(_G.EntityScript,"GetDisplayName",function(name,self)
-	if self.health_info_max ~= nil and self.health_info_max ~= 0 then
-		name = AddString(name,self.health_info,self.health_info_max)
-	end
-	return name
-end)
+--Inject in DisplayName function
+if not IsDedicated then --also for host
+	InjectFull(_G.EntityScript,"GetDisplayName",function(name,self)
+		if self.health_info_max ~= nil and self.health_info_max ~= 0
+			and not self:HasTag("playerghost") and DISABLE_HELATHINFO_RECURSIVE == 0
+		then
+			name = AddString(name,self.health_info,self.health_info_max)
+		end
+		return name
+	end)
+end
 
 -----Only Server Side -----
 if not IsServer then
@@ -268,4 +278,54 @@ InjectFull(health,"DoDelta",function(aaa,self)
 		self.inst.net_health_info:set(self.currenthealth)
 	end
 end)
+
+if IsDedicated then
+	return
+end
+
+--------------------------------- PART IV ------------------------------
+------------------ Only HOST Side code (not dedicated!)-----------------
+
+
+--Removing health data from game interface
+
+--Skeleton info
+AddPrefabPostInit("skeleton_player",function(inst)
+	local old_fn = inst.SetSkeletonDescription
+	inst.SetSkeletonDescription = function(inst, prefab, name, cause, pkname, ...)
+		name = type(name)=="string" and name:match(CUT_PATTERN) or name
+		pkname = type(pkname)=="string" and pkname:match(CUT_PATTERN) or pkname
+		return old_fn(inst, prefab, name, cause, pkname, ...)
+	end
+end)
+
+--Fixing global functions
+
+local old_GetNewDeath = _G.rawget(_G,"GetNewDeathAnnouncementString")
+if old_GetNewDeath then
+	_G.GetNewDeathAnnouncementString = function(theDead, source, pkname, ...)
+		pkname = type(pkname)=="string" and pkname:match(CUT_PATTERN) or pkname
+		DISABLE_HELATHINFO_RECURSIVE = DISABLE_HELATHINFO_RECURSIVE + 1
+		local message = old_GetNewDeath(theDead, source, pkname, ...)
+		DISABLE_HELATHINFO_RECURSIVE = DISABLE_HELATHINFO_RECURSIVE - 1
+		return message
+	end
+end
+
+local old_GetNewRez = _G.rawget(_G,"GetNewRezAnnouncementString")
+if old_GetNewRez then
+	_G.GetNewRezAnnouncementString = function(theRezzed, source, ...)
+		source = type(source)=="string" and source:match(CUT_PATTERN) or source
+		DISABLE_HELATHINFO_RECURSIVE = DISABLE_HELATHINFO_RECURSIVE + 1
+		local message = old_GetNewRez(theRezzed, source, ...)
+		DISABLE_HELATHINFO_RECURSIVE = DISABLE_HELATHINFO_RECURSIVE - 1
+		return message
+	end
+end
+
+
+
+
+
+
 

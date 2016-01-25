@@ -23,6 +23,7 @@ v2.0.2 - Added support for cavedweller's prefab.
 v2.0.3 - Removed unused tags.
 v2.0.4 - Blacklisted Yamche (Musha's pet).
 v2.0.5 - Added cave creatures tags (possibly)
+v2.0.6 - Fixed announces. Fixed ghosts. Fixed skeletons. Fixed almost all potential issues for dedicated servers.
 
 ================
 [h1]Credits[/h1]
