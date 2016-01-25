@@ -18,6 +18,11 @@ v1.4.5 - Added more check tags for other entities that should also display healt
 v1.4.6 - Fixed controller crashing issue (recent update)
 v1.4.7 - Added a new option to choose the block style.
 v2.0.0 - Refactoring. Removed component. Changed injection algorithms. Improved compatibility with other mods and future updates of the game. Now mod is more simple and stable. Used cache for initialization, improved speed (less CPU usage). Changed icon size to 128x128 (no more warnings in log file about wrong size).
+v2.0.1 - Fixed divider issue.
+v2.0.2 - Added support for cavedweller's prefab.
+v2.0.3 - Removed unused tags.
+v2.0.4 - Blacklisted Yamche (Musha's pet).
+v2.0.5 - Added cave creatures tags (possibly)
 
 ================
 [h1]Credits[/h1]

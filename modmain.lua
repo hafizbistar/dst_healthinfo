@@ -138,6 +138,9 @@ local function WhiteFilter(inst)
 		inst:HasTag("monster") or
 		inst:HasTag("prey") or
 		inst:HasTag("scarytoprey") or
+		inst:HasTag("notraptrigger") or
+		inst:HasTag("hostile") or
+		inst:HasTag("cavedweller") or
 		inst:HasTag("player")
 		) and not
 		(
