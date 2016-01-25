@@ -9,16 +9,25 @@ local divider = _G.tonumber(GetModConfigData("divider")) or 0
 local ds = {"-","[","(","{","<"} ds=ds[divider] or ""
 local de = {"-","]",")","}",">"} de=de[divider] or ""
 
-
+--Removing the info from some places in the game code.
 local type_patterns = { "%d+%%", "%d+ / %d+ %d+%%" }; type_patterns[0] = "%d+ / %d+"
 local CUT_PATTERN = "^(.*) "..(ds~="" and "%"..ds or "")..tostring(type_patterns[show_type])..(de~="" and "%"..de or "").."$"
-print("Health Info Pattern: "..CUT_PATTERN)
+--print("Health Info Pattern: "..CUT_PATTERN)
+
+--API Edition
+mods=_G.rawget(_G,"mods")or(function()local m={}_G.rawset(_G,"mods",m)return m end)()
+if mods.HealthInfo ~= nil then
+	print("ERROR: You are trying to enable the mod twice!")
+	return --Protection from double enabling.
+end
+local t = { CUT_PATTERN = CUT_PATTERN, version = modinfo.version }
+mods.HealthInfo = t
 
 local SHOULD_OVERWRITE_ACTION = nil
 
 local DISABLE_HELATHINFO_RECURSIVE = 0 --Must be disabled if > 0
 
-local function AddString(name,cur,mx) --cur and mx are float!
+t.AddString = function(name,cur,mx) --cur and mx are float!
 	if DISABLE_HELATHINFO_RECURSIVE == 0 and type(name) == "string" then
 		if show_type == 0 then
 			name = name.." "..ds..math.floor(cur+0.5).." / "..math.floor(mx+0.5) ..de -- +0.5 means round fn
@@ -36,6 +45,7 @@ end
 local function InjectFull(comp,fn_name,fn)
 	--print("Full Inject: ",tostring(comp),tostring(fn_name),tostring(fn))
 	local old = comp[fn_name]
+	t["old_"..fn_name] = old --Saving and publishing all old functions. Someone may need it.
 	comp[fn_name] = function(self,...)
 		local res = old(self,...)
 		return fn(res,self,...)
@@ -70,10 +80,10 @@ InjectFull(_G.BufferedAction,"GetActionString",function(str,self)
 		if self.target and DISABLE_HELATHINFO_RECURSIVE == 0 then
 			if TheNet ~= nil and self.target.health_info then
 				--print("OVERWRITE (TheNet)")
-				str = AddString(str,self.target.health_info,self.target.health_info_max)
+				str = t.AddString(str,self.target.health_info,self.target.health_info_max)
 			elseif TheNet == nil and self.target.components.health then
 				--print("OVERWRITE (DS)")
-				str = AddString(str,self.target.components.health.currenthealth,self.target.components.health.maxhealth)
+				str = t.AddString(str,self.target.components.health.currenthealth,self.target.components.health.maxhealth)
 			end
 		end
 		SHOULD_OVERWRITE_ACTION = nil
@@ -88,7 +98,7 @@ if TheNet == nil then
 	InjectFull(_G.EntityScript,"GetDisplayName",function(name,inst)
 		local comp = inst.components.health or inst.components.boathealth
 		if comp ~= nil then
-			name = AddString(name,comp.currenthealth,comp.maxhealth)
+			name = t.AddString(name,comp.currenthealth,comp.maxhealth)
 		end
 		return name
 	end)
@@ -109,11 +119,28 @@ local IsDedicated = TheNet:IsDedicated()
 local BLACK_FILTER_CACHED = {nil,nil,nil,nil,nil,nil,nil,nil,nil,} --no add health_info
 local WHITE_FILTER_CACHED = {nil,nil,nil,nil,nil,nil,nil,nil,nil,} --always add health_info
 
+--API functions for using our cache directly.
+--NB! Your mod must be "all_clients_require_mod" if you want to use it without crash!
+t.AddToWhiteList = function(prefab)
+	WHITE_FILTER_CACHED[prefab] = true
+end
+t.AddToBlackList = function(prefab)
+	BLACK_FILTER_CACHED[prefab] = true
+end
+
 --Our cool filters with black Jack
 
 local function BlackFilter(inst)
 	if not (inst.Network ~= nil and inst.Transform ~= nil) then --and inst.prefab == "spider") then
 		--print(inst.prefab.." - now in BLACKLIST")
+		return true
+	end
+	if  (
+		inst:HasTag("no_healthinfo") or
+		inst:HasTag("yamche") or
+		inst.prefab == "balloon"
+		)
+	then
 		return true
 	end
 end
@@ -147,11 +174,14 @@ local function WhiteFilter(inst)
 		inst:HasTag("notraptrigger") or
 		inst:HasTag("hostile") or
 		inst:HasTag("cavedweller") or
-		inst:HasTag("player")
-		) and not
-		(
-			inst:HasTag("yamche")
-		)
+		inst:HasTag("player") or
+		inst:HasTag("healthinfo")
+		) 
+		--and not
+		--(
+			--inst:HasTag("yamche")
+			--Do not add here anything. There is "BlackFilter" function.
+		--)
 	then
 		--print(inst.prefab.." - WhiteList")
 		return true
@@ -245,7 +275,7 @@ if not IsDedicated then --also for host
 		if self.health_info_max ~= nil and self.health_info_max ~= 0
 			and not self:HasTag("playerghost") and DISABLE_HELATHINFO_RECURSIVE == 0
 		then
-			name = AddString(name,self.health_info,self.health_info_max)
+			name = t.AddString(name,self.health_info,self.health_info_max)
 		end
 		return name
 	end)

@@ -24,6 +24,7 @@ v2.0.3 - Removed unused tags.
 v2.0.4 - Blacklisted Yamche (Musha's pet).
 v2.0.5 - Added cave creatures tags (possibly)
 v2.0.6 - Fixed announces. Fixed ghosts. Fixed skeletons. Fixed almost all potential issues for dedicated servers.
+v2.0.7 - API Edition. Add "healthinfo" tag to enable health indicator or add "no_healthinfo" to force disable health indicator. Also there are many accessible functions in modmain.lua. Now you can interact the mod in many ways. 
 
 ================
 [h1]Credits[/h1]
