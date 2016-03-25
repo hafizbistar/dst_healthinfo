@@ -2,7 +2,7 @@
 name = "Health Info"
 author = "xVars"
 forumthread = ""
-version = "2.1.0"
+version = "2.1.2"
 --version_compatible = "2.0.7"
 
 local IS_DST = name.utf8len
@@ -49,7 +49,7 @@ configuration_options =
             {description = russian and "Оба" or "Both", data = 2, hover = russian and "Паук <100 / 100 100%>" or "Spider <100 / 100 100%>"},
 			(IS_DST
 				and {description = russian and "Разброс" or "Variation", data = 3,
-					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"} 
+					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"}
 				or nil
 			),
         },
