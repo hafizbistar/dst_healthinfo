@@ -2,8 +2,8 @@
 name = "Health Info"
 author = "xVars"
 forumthread = ""
-version = "2.1.2"
---version_compatible = "2.0.7"
+version = "2.1.3"
+--version_compatible = "2.1.3"
 
 local IS_DST = name.utf8len
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
@@ -49,7 +49,7 @@ configuration_options =
             {description = russian and "Оба" or "Both", data = 2, hover = russian and "Паук <100 / 100 100%>" or "Spider <100 / 100 100%>"},
 			(IS_DST
 				and {description = russian and "Разброс" or "Variation", data = 3,
-					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"}
+					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"} 
 				or nil
 			),
         },
@@ -88,12 +88,12 @@ configuration_options =
         label = russian and "Объекты из модов" or "Unknown Objects",
 		hover = russian
 			and "Автоматическое определение наличия здоровья.\Чем больше типов объектов поддерживается, тем меньше совместимость."
-			or "Automatic detection of unknown object.\nMore types of objects, less compatibility.",
+			or "Automatic detection of unknown objects.\nMore types of objects, less compatibility.",
         options =
         {
             {description = "Ignore", data = 0, hover = "100% compatibility\nBut you won't see health of mod items, players and creatures."},
             {description = "Players", data = 1, hover = '99% compatibility\nThe mod will check only "player" tag.'},
-            {description = "Creatures", data = 2, hover = '97% compatibility\nThe mod will check "player", "monster", "animal" and "smallcreature" tags.'},
+            {description = "Creatures", data = 2, hover = '97% compatibility\nThe mod will check only "player", "monster", "animal",\n"smallcreature", "largecreature" and "epic" tags.'},
             {description = "All", data = 3, hover = "90% compatibility\nAll known tags will be used."},
         },
         default = 1,

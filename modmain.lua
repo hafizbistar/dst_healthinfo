@@ -191,6 +191,7 @@ local function WhiteFilter(inst)
 	end
 	if unknwon_prefabs == 2 then --some creatures
 		return inst:HasTag("player") or inst:HasTag("smallcreature") or inst:HasTag("animal") or inst:HasTag("monster")
+			or inst:HasTag("largecreature") or inst:HasTag("epic")
 	end
 	--else unknwon_prefabs == 3 (all known tags)
 	if  (
@@ -221,6 +222,7 @@ local function WhiteFilter(inst)
 		inst:HasTag("notraptrigger") or
 		inst:HasTag("hostile") or
 		inst:HasTag("cavedweller") or
+		inst:HasTag("epic") or
 		inst:HasTag("player")
 		) 
 		--and not
@@ -259,8 +261,7 @@ if IsServer then
 			print("Also you can change settings of the Health Info mod to be more useful but less compatible.")
 			print('If you are mod developer, you can add the tag "healthinfo" to you prefab:')
 			print('inst:AddTag("healthinfo")')
-			print('Add this line before this line: inst.entity:SetPristine()')
-			print('And before this line: if not TheWorld.ismastersim')
+			print('Add tags before this line: inst.entity:SetPristine()')
 			print('Thanks!')
 			print("--------------------------------------------------------")
 		end
@@ -372,8 +373,15 @@ local function debug_log(inst,mess)
 	end
 end
 --]]
+local TheWorld
+AddPrefabPostInit("world",function(inst)
+	TheWorld = inst
+end)
+
+local boss32bit = { toadstool = true, dragonfly = true,}
 
 --Initialization of all prefabs.
+local net_uint,net_ushortint = _G.net_uint,_G.net_ushortint
 AddPrefabPostInitAny(function(inst)
 	--print("NEW PREFAB - ",inst)
 	--print("already in white list")
@@ -383,8 +391,13 @@ AddPrefabPostInitAny(function(inst)
 	end
 	inst.health_info = 0
 	inst.health_info_max = 0 --should be exact 0 because we will check it later if it's not zero.
-	inst.net_health_info = _G.net_ushortint(inst.GUID, "health_info", "health_info_dirty")
-	inst.net_health_info_max = _G.net_ushortint(inst.GUID, "health_info_max", "health_info_max_dirty")
+	if boss32bit[inst.prefab] then --32bit. Max 4kkk hp.
+		inst.net_health_info = net_uint(inst.GUID, "health_info", "health_info_dirty")
+		inst.net_health_info_max = net_uint(inst.GUID, "health_info_max", "health_info_max_dirty")
+	else --16bit. Maximum of 65535 health.
+		inst.net_health_info = net_ushortint(inst.GUID, "health_info", "health_info_dirty")
+		inst.net_health_info_max = net_ushortint(inst.GUID, "health_info_max", "health_info_max_dirty")
+	end
 	inst.health_info_max_exact = 0 --unknown for special options
 	if not IsDedicated then
 		--Means client OR host.
@@ -392,7 +405,7 @@ AddPrefabPostInitAny(function(inst)
 		inst:ListenForEvent("health_info_dirty", OnHealthInfoDirty)
 		inst:ListenForEvent("health_info_max_dirty", OnHealthInfoMaxDirty)
 	end
-	if not _G.TheWorld.ismastersim then
+	if not TheWorld.ismastersim then
 		--Meand only client.
 		--debug_log(inst,"ismastersim, return")
 		return

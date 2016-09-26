@@ -63,6 +63,57 @@ hutch=true, tentacle_shadow=true, summonaron=true, scout=true, edward=true, jack
 darkwx78ghost=true, buker=true, ruk=true, arc=true, wurp=true, guts=true, saphira=true, alduin=true, raiku=true, energyfennec=true, tuxingsun=true, 
 warren=true, woodlegs=true, kasen=true,
 
+grassgekko=true, shadowlumber=true, shadowminer=true, stickybomb=true, shadowduelist=true, shadowdigger=true, 
+stickybomb_crit=true, summonjarvi=true, phoebe=true, mag=true, waxwing=true, hoopoe=true, mrdemon2=true, pennyduelist=true, 
+gate_of_babylon=true, ninjaclone=true, summonminichop=true, demoman=true, spidey=true, kutsil=true, kuriboh=true, gaster=true, 
+archer=true, saber=true, greatsage=true, jeff=true, default=true, noodle=true, happy=true, madeleine=true, teemo=true, mortox=true, 
+charlie=true, ker=true, pryce=true, spiderman=true, barczak=true, elizabeth=true, kotori=true, mario=true, asriel=true, twister=true, 
+finnthehuman=true, unik=true, twister_seal=true, zg_fx_luffyarm=true, revok=true, animsparrow=true, spy=true, hk=true, tf2soldier=true, 
+poisson_yarn=true, wooly=true, wiltonmod=true, devildog=true, shapeshifter=true, neptune=true, nasking=true, zacharie=true, ma=true, penny=true, 
+treeplayer=true, perfect=true, spooky1=true, thomas=true, moth=true, digiduelist=true, anub=true, neopolitan=true, lawrence=true, spek=true, 
+chamber=true, esentry=true, death=true, growlie=true, spooky2=true, smallbirdp=true, scootaloo=true, jtr=true, morewords=true, spooky4=true, 
+mystery=true, clockwork3player=true, ada=true, malami=true, toadstool=true, linos=true, frits_ghost=true, digilumber=true, blanc=true, dispenser=true, 
+rakky=true, tower=true, evil_mound=true, digiminer=true, wishes=true, bruterobot=true, poisonspiderden=true, digidigger=true, cain=true, super_reaperrobot=true, 
+yang=true, houndredplayer=true, reaperrobot=true, warriorp=true, north=true, draugr=true, hinagiku=true, vegeta_evil=true, clockwork1player=true, 
+summerfly=true, effie=true, refletfe=true, krampusp=true, donaldtrump=true, danka=true, eli=true, snicketytom=true, terrorist=true, wayrra=true, 
+flash=true, muffet=true, brook=true, rubi=true, lucario=true, chimarrao=true, teto=true, webbiter=true, evilbutterfly=true, saibamen=true, yuno=true, 
+reflet=true, snc=true, biker=true, sealfollower=true, baleog=true, caitlin=true, clockwork2player=true, spooky3=true, whitespiderplayer=true, 
+knight_nightmare=true, celnar=true, bluebird=true, rei=true, alphys=true, nedelya=true, spooky=true, chillywilly=true, dante=true, elecman=true, 
+fiddlesticks=true, gollum=true,
+
+zg_spider_steel=true, shadowtentacle2=true, offghost=true, clockqueen=true, scythe=true, marisa=true, denguard=true, 
+doge=true, barbarianking=true, iceking=true, miko=true, firespider=true, asp_ghost=true, kokoflame=true, kokocrazy=true, kokofrost=true, 
+fuzzy=true, miku=true, kokoshiny=true, micky=true, kagerou=true, reisen=true, koor=true, doflamingo=true, hev=true, twigs_character=true, 
+sharkittenp=true, weeseeks=true, kokocadence=true, winston=true, tenshi=true, chesterp=true, wakkari=true, mutt=true, elephantplayer=true, 
+tina=true, watcher=true, glommerp=true, thejudge=true, grull=true, plaguedoc=true, grassgek=true, gaobee=true, wulfe=true, mokey=true, tigersharkp=true, 
+xion=true, flyp=true, rg01=true, amateratsu=true, twisterp=true, tula=true, snakep=true, isaac=true, alice=true, nue=true, lrj=true, samansha=true, 
+widgette=true, jesse=true, riolu=true, tentacle2=true, bav=true, kokoguard=true, stikmen=true, poisonspider=true, gekkop=true, dragoonp=true, 
+cc_barbarian=true, ghost2p=true, wogmaw=true, frogp=true, summonsk=true, kokodiseased=true, yuuka=true, mahd=true, haunter=true, shadowplayer=true, 
+weiss=true, tgb=true, zobbit=true, roncat=true, genesis=true, beep=true, dipper=true, mikasaackerman=true, queenelsa=true, vaultboy=true, shadowwilson=true, 
+jon=true, tzgn=true, king_piccolo=true, mutated_namek=true, kuroneko=true, no=true, perdp=true, molep=true, wuppet=true, olivia=true, cinnamon_active=true, 
+blackchocobo=true, potato=true, yellowchocobo=true, swwarriorp=true, merm2p=true, pengullp=true, redchocobo=true, summonsaber=true, oprobin=true, 
+crykov=true, clyde=true, jormungandr=true, oxp=true, noz=true, riktor=true, stinkrayp=true, fox=true, wisp=true, wynter=true, drei=true, palmtreep=true, 
+hogp=true, magyaku=true, fly2p=true, doydoyp=true, wei=true,
+
+greenworm=true, personal_licking=true, summonfran=true, snake=true, snake_poison=true, pigman_yellow=true, suofeiya_fenshen=true, 
+hatbunnyman=true, yoshino_rabbit=true, wildbeaver=true, colored_bunnyman=true, rabbit_snow=true, yeti=true, perma_grassgekko=true, 
+pigman_blue=true, wolliedog=true, leif_snow=true, pigman_gray=true, wildbore=true, ox=true, perma_beardlord=true, 
+reingoat=true, perma_mosquito=true, assasin_wilson=true, canary=true, kurumi_self=true, giant_bunnyman=true, varg=true, 
+goddess_spider_hostile=true, houndmound_p=true, quickiebomb=true, moonhound=true, moonpig=true, spidernest_p=true, 
+shadowduelist3=true, loon=true, mutant_bunnyman=true, kb_shadowtentacle=true, goddess_butterfly=true, quickiebomb_crit=true, 
+inori=true, greengrassgekko=true, frog_purple=true, pigman_cyborg=true, shadowduelist2=true, spider_poisonous=true, 
+tieravil=true, grey_lightning_goat=true, merm_blue=true, treeguard=true, tinypig=true, bishop_guard=true, goddess_spider=true, 
+weqb=true, akatsuki=true, bearger_friend=true, jango=true, shiranui=true, gardevoir=true, goddess_statue=true, 
+hitsugaya=true, pokemon=true, fancy_penguin=true, hibiki=true, ram=true, clownpiece=true, gaohive=true, inazuma=true, 
+jugger=true, scarvolo=true, lapis=true, rem=true, doctorcrane=true, babyox=true, hououin=true, mea=true, ikazuchi=true, 
+electrichound=true, over9000=true, yoshino=true, wanda=true, alluringskull=true, ruby=true, shadowdeerclops=true, 
+rabbitp=true, shinycario=true, summonspooky=true, pao=true, rg02=true, spidernest2_p=true, spidernest3_p=true, 
+webzer=true, musha_small_rep=true, tohsaka=true, peri=true, meru=true, flupp=true, zg_ch2_mihawk=true, darkdexter=true, 
+void=true, neferpitou=true, io=true, goddess_sword=true, crabbitp=true, apep=true, houndvenomp=true, pearl=true, 
+darkhound=true, icedexter=true, chen=true, telehound=true, wabbit=true, smalldoydoyp=true, destroyerhound=true, 
+packp=true, constantine=true, lyrica=true, cirno=true, slurtlep=true, charliethegardener=true, toriel=true, bob=true, 
+melon=true, tewi=true, loyalcat=true, pit=true, biohound=true, serenaanipoke=true, walker=true, izayoi=true, goatp=true,
+
 }
 
 
@@ -89,3 +140,5 @@ deciduoustree_normal=true, wormlight_light_fx=true, wormlight_plant=true, wormwa
 purpleamulet_blueprint=true, chesterlight=true, cave_banana_burnt=true, pillar_ruins=true, campfire=true, nightlight=true, hambat=true, meat=true, minifan_blueprint=true, wormhole_limited_1=true, dug_berrybush_placer=true, flower_cave_triple=true, dug_marsh_bush=true, ancient_blueprint=true, slurper_pelt=true, goose_feather=true, armorsnurtleshell=true, spore_small=true, acorn_placer=true, trinket_1=true, bishop_charge=true, deerclopswarning_lvl3=true, butterflymuffin=true, pottedfern_placer=true, ghost_transform_overlay_fx=true, rubble_med=true, statue_transition=true, trinket_19=true, ruinshat_blueprint=true, firestaff=true, spidergland=true, waterballoon_blueprint=true, eyebrellahat=true, waterballoon_splash=true, diviningrod_blueprint=true, spider_web_spit_creep=true, wormwarning_lvl1=true, transistor_blueprint=true, corn_seeds=true, splash=true, 
 trap_blueprint=true, nightlight_placer=true, blueprint=true, compass_blueprint=true, ancient_altar=true, papyrus_blueprint=true, wall_moonrock_item=true, fishingrod=true, meteorwarning=true, nightlight_flame=true, migration_portal=true, marblepillar=true, trap_teeth_maxwell=true, spear=true, campfire_blueprint=true, pumpkin=true, beargerwarning_lvl4=true, resurrectionstatue_placer=true, bushhat=true, beargervest=true, hauntfx=true, backpack_blueprint=true, basalt=true, lavae_tooth=true, abigail_flower=true, trinket_12=true, armordragonfly=true, multitool_axe_pickaxe=true, basalt_pillar=true, campfirefire=true, kabobs=true, spat_splash_fx_med=true, beargerwarning_lvl1=true, dr_warm_loop_1=true, batwing=true, maxwell=true, saddle_basic=true, evergreen_normal=true, nitre=true, researchlab=true, raincoat_blueprint=true, cactus_meat_cooked=true, spore_tall=true, 
 shock_fx=true, researchlab4_placer=true, nightmare_timepiece=true, cane=true, caverain=true, cave_fern=true, attunable_classified=true, trinket_27=true, houndwarning_lvl2=true, }
+
+
