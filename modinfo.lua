@@ -1,9 +1,9 @@
 -- information about the mod
 name = "Health Info"
-author = "xVars"
+author = "star, xVars"
 forumthread = ""
-version = "2.1.3"
---version_compatible = "2.1.3"
+version = "2.1.4"
+version_compatible = "2.1.3"
 
 local IS_DST = name.utf8len
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
@@ -49,7 +49,7 @@ configuration_options =
             {description = russian and "Оба" or "Both", data = 2, hover = russian and "Паук <100 / 100 100%>" or "Spider <100 / 100 100%>"},
 			(IS_DST
 				and {description = russian and "Разброс" or "Variation", data = 3,
-					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"} 
+					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"}
 				or nil
 			),
         },

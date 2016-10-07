@@ -373,12 +373,21 @@ local function debug_log(inst,mess)
 	end
 end
 --]]
-local TheWorld
+local TheWorld = _G.TheWorld
+if _G.TheNet.GetIsMasterSimulation then
+	_G.getmetatable(_G.TheNet).__index.GetIsMasterSimulation = (function()
+		local oldObj = _G.getmetatable(_G.TheNet).__index.GetIsMasterSimulation
+		return function(... )
+			TheWorld = _G.TheWorld
+			return oldObj(...)
+		end
+	end)()
+end
 AddPrefabPostInit("world",function(inst)
 	TheWorld = inst
 end)
 
-local boss32bit = { toadstool = true, dragonfly = true,}
+local boss32bit = { toadstool = true, dragonfly = true,} --Prefabs with over 65535 hp.
 
 --Initialization of all prefabs.
 local net_uint,net_ushortint = _G.net_uint,_G.net_ushortint
@@ -406,7 +415,7 @@ AddPrefabPostInitAny(function(inst)
 		inst:ListenForEvent("health_info_max_dirty", OnHealthInfoMaxDirty)
 	end
 	if not TheWorld.ismastersim then
-		--Meand only client.
+		--Means only client.
 		--debug_log(inst,"ismastersim, return")
 		return
 	end
