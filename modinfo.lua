@@ -87,7 +87,7 @@ configuration_options =
         name = "unknwon_prefabs",
         label = russian and "Объекты из модов" or "Unknown Objects",
 		hover = russian
-			and "Автоматическое определение наличия здоровья.\Чем больше типов объектов поддерживается, тем меньше совместимость."
+			and "Автоматическое определение наличия здоровья.\nЧем больше типов объектов поддерживается, тем меньше совместимость."
 			or "Automatic detection of unknown objects.\nMore types of objects, less compatibility.",
         options =
         {
