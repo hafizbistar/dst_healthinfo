@@ -1,3 +1,11 @@
+v2.1.6 (2019)
+ - Revived the option for online feedback.
+ - Added new prefabs as of August 2019.
+
+v2.1.5 (2016)
+ - Removed option for online feedback.
+ - Prefab database is updated on December 29, 2016. This is the last update of database. Use the option "Unknown Objects" if needed.
+
 v2.1.4
  - Improved some mods compatibility.
 

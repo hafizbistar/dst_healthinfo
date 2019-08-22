@@ -114,12 +114,58 @@ darkhound=true, icedexter=true, chen=true, telehound=true, wabbit=true, smalldoy
 packp=true, constantine=true, lyrica=true, cirno=true, slurtlep=true, charliethegardener=true, toriel=true, bob=true, 
 melon=true, tewi=true, loyalcat=true, pit=true, biohound=true, serenaanipoke=true, walker=true, izayoi=true, goatp=true,
 
+dyc_door_stone=true, dyc_wall_stone=true, dyc_door_limestone=true, dyc_door_wood=true, fence_gate=true, dyc_wall_limestone=true, 
+dyc_door_hay=true, fence=true, dyc_wall_wood=true, dyc_door_ruin=true, dyc_wall_hay=true, dyc_door_moonrock=true, 
+dyc_wall_ruin=true, dyc_wall_moonrock=true, beeguard=true, beequeen=true, remibat=true, shadow_knight=true, shadow_bishop=true, 
+shadow_rook=true, canary_poisoned=true, musha_spore_fire=true, skeletonguard=true, icebeefalo=true, beefaloking=true, 
+spiderhole_p=true, fireward=true, zg_ch2_wathgrithr=true, zg_ch2_wolfgang_mighty=true, zg_ch2_wx78=true, zg_ch2_woodie=true, 
+zg_ch2_waxwell=true, zg_ch2_wendy=true, zg_ch2_wes=true, zg_ch2_wilson=true, zg_ch2_wickerbottom=true, zg_ch2_webber=true, 
+zg_ch2_willow=true, zg_fx_balloon=true, firebeefalo=true, lightningbeefalo=true, engineer=true, summonmana=true, 
+kyoku=true, hqg=true, fenghoho=true, yohime=true, fhl=true, kurumi=true, shovelknight=true, shinai=true, rikka=true, 
+fairies=true, sentinel_bishop=true, sentinel_knight=true, remilia=true, luoxiaofei=true, batter=true, sulili=true, 
+darkimp=true, frog_a=true, winnie=true, hadabra=true, pkc_longpig=true, pkc_cuipig=true, infernalboss=true, cheese=true, 
+pkc_redpig=true, kokocarrier=true, pkc_bigpig=true, shadow_knightp=true, prophet=true, zgsabber=true, obenja=true, 
+freyja=true, lucas=true, pixie=true, gggroot=true, lucina=true, poly=true, glace=true, shenxiustone=true, daryl=true, 
+rivendst=true, shenxiuclone=true, mana_moose=true, mana_deerclops=true, mana_bearger=true, sand__priest=true, mabel=true, 
+error_sans=true, dwillow=true, cream=true, mana_dragonfly=true, idf=true, asparagus=true, stagehandp=true, monkey__king=true, 
+feliciaday=true, pig__sy=true, tang__seng=true, white__dragon__horse=true, thana=true, suofeiya=true, pennywise=true, 
+ratchet=true, tazdor=true, winged=true, toadstoolp=true, wiley=true, shrek=true, koalefant_albino_base=true, vergence=true, 
+eddiebox=true, nalf=true, webber_frog=true, wilmore_turret=true, ori=true, astrid=true, ink_sans=true, capamerica=true, 
+athena=true, jason=true, webster=true, shadow_rookp=true, shikieiki=true, wolft=true, neon=true, dragon=true, dutyexoai=true, 
+warper=true, superwilson=true, shadow_bishopp=true, nicole=true, withers=true, lola=true, hutchp=true, hon=true,
+
+dyc_fence_gate=true, dyc_fence=true, klaus=true, deer_blue=true, deer_red=true, shadowbatenemy=true, td1madaogolbalmengxin=true, 
+wln=true, wall_living=true, wall_hedge=true, shadowbatminion=true, wall_reed=true, abigail_festive=true, balloon_festive=true, 
+spiderden_festive=true, spider_snowman=true, lwww=true, royalspiderqueen=true, pkc_eyeturret_big=true, pkc_eyeturret_red=true, 
+pkc_pigman_big=true, pkc_pigman_red=true, pkc_eyeturret_long=true, pkc_pigman_long=true, iceclops=true, vargpup=true, 
+pkc_eyeturret_cui=true, pkc_pigman_cui=true, mamavarg=true, honeybearger=true, spider_warrior_ice=true, eyeturret_diamond=true, 
+bomballoon=true, wisspher=true, littlesnot=true, bigsnot=true, chris=true, draw_ghost=true, wallander=true, sanity_ghost=true, 
+tails=true, nelke=true, newpig=true, will=true, sheele=true, fei=true, rhunari=true, xq=true, sdf=true, beequeenp=true, 
+cuckoo=true, alucard=true, klausp=true, wolfiedog=true, trainerred=true, babyhoundp=true, jones=true, pikachu=true, 
+blake=true, heather=true, dragonfly=true, peridot=true, stw=true, selene=true, nefarious=true, walden=true, widow=true, 
+xiana=true, aya=true, birdp=true, birchnutterp=true, grillby=true, mlucario=true,
+
+--2019
+antlion=true, bernie_big=true, boat=true, 
+canary=true, carrat=true, clayhound=true, crawlinghorror=true, crawlingnightmare=true, 
+fence=true, fence_gate=true, fruitdragon=true, 
+moonbutterfly=true, mutated_penguin=true, mutatedhound=true, nightmarebeak=true, 
+pigelite1=true, pigelite2=true, pigelite3=true, pigelite4=true, puffin=true, quagmire_park_gate=true, 
+quagmire_pigeon=true, sandblock=true, sandspike=true, shadowchanneler=true, shadowdigger=true, 
+shadowduelist=true, shadowlumber=true, shadowminer=true, spider_moon=true, stalker=true, stalker_atrium=true, stalker_forest=true, 
+terrorbeak=true, toadstool_dark=true, winona_catapult=true, 
+
 }
 
 
 
 --No add of health_info
-BLACK_FILTER = {world=true, forest=true, cave=true, shard_network=true, world_network=true, cave_network=true, maxwellthrone=true, maxwelllight=true, yellowstaff=true, trinket_8=true, armorruins=true, wall_wood_item=true, puppet_wickerbottom=true, monsterlasagna=true, tophat=true, beefalohat=true, stick=true, firepit_placer=true, cave_banana_tree=true, teleportato_box=true, wardrobe_blueprint=true, turf_carpetfloor=true, boomerang=true, smallhumanmeat_dried=true, plant_normal=true, turf_carpetfloor_blueprint=true, science_blueprint=true, rock_moon=true, turf_savanna=true, beargerwarning_lvl2=true, minifan=true, spidereggsack_placer=true, ratatouille=true, animal_track=true, wall_stone_item_blueprint=true, blueamulet_blueprint=true, stalagmite=true, cookpot=true, pitchfork_blueprint=true, yellow_leaves_chop=true, brokenwall_ruins=true, icepack_blueprint=true, waxwelljournal=true, taffy=true, arrowsign_panel_placer=true, orangeamulet_blueprint=true, walrus_tusk=true, werebeaver_transform_fx=true, sewing_kit=true, golden_tooth=true, chessjunk3=true, gunpowder=true, sounddebugicon=true, humanmeat=true,
+BLACK_FILTER = {
+boat_item=true, boat_item_collision=true, boat_player_collision=true, 
+carrat_planted=true, deer_growantler_fx=true, deer_unshackle_fx=true, eyeturret_base=true, hutch_music_light_fx=true, 
+minotaurchestspawner=true, shadow_bishop_fx=true, 
+
+world=true, forest=true, cave=true, shard_network=true, world_network=true, cave_network=true, maxwellthrone=true, maxwelllight=true, yellowstaff=true, trinket_8=true, armorruins=true, wall_wood_item=true, puppet_wickerbottom=true, monsterlasagna=true, tophat=true, beefalohat=true, stick=true, firepit_placer=true, cave_banana_tree=true, teleportato_box=true, wardrobe_blueprint=true, turf_carpetfloor=true, boomerang=true, smallhumanmeat_dried=true, plant_normal=true, turf_carpetfloor_blueprint=true, science_blueprint=true, rock_moon=true, turf_savanna=true, beargerwarning_lvl2=true, minifan=true, spidereggsack_placer=true, ratatouille=true, animal_track=true, wall_stone_item_blueprint=true, blueamulet_blueprint=true, stalagmite=true, cookpot=true, pitchfork_blueprint=true, yellow_leaves_chop=true, brokenwall_ruins=true, icepack_blueprint=true, waxwelljournal=true, taffy=true, arrowsign_panel_placer=true, orangeamulet_blueprint=true, walrus_tusk=true, werebeaver_transform_fx=true, sewing_kit=true, golden_tooth=true, chessjunk3=true, gunpowder=true, sounddebugicon=true, humanmeat=true,
 teleportato_base=true, amulet_blueprint=true, beemine_maxwell=true, lureplantbulb_placer=true, minerhat=true, trunkvest_summer_blueprint=true, bandage_blueprint=true, reticule=true, purple_leaves=true, collapse_big=true, lightning_rod_placer=true, rock_flintless_med=true, deerclops_eyeball=true, pillar_cave_flintless=true, spawn_fx_tiny=true, pond_cave=true, light_blueprint=true, wormlight_light_fx_lesser=true, evergreen_sparse_normal=true, armorslurper_blueprint=true, spawn_fx_small=true, cane_blueprint=true, honeyham=true, orangegem=true, treasurechest_blueprint=true, amulet=true, ruinshat=true, dragonflychest=true, upper_nightmarefissurefx=true, torch=true, wormlight=true, krampuswarning_lvl3=true, siestahut=true,
 spat_splash_fx_low=true, mining_fx=true, birdcage_blueprint=true, marble=true, evergreen_stump=true, wormlight_lesser=true, pond_algae=true, durian=true, spidereggsack=true, firestaff_blueprint=true, deciduous_root=true, dug_grass_placer=true, waterballoon=true, flower_withered=true, featherhat_blueprint=true, wardrobe=true, researchlab_placer=true, icehat_blueprint=true, telebase_blueprint=true, ice=true, attackfire_fx=true, lavae_egg=true, marbletree_2=true, spider_web_spit=true, farmrock=true, spat_splash_fx_full=true, honey=true, bonestew=true, molehat=true, brokenwall_stone=true, cactus_flower=true, human_amulet=true, trinket_13=true, cave_banana=true, wormwarning_lvl3=true, campfire_placer=true, deerclopswarning_lvl2=true, treasurechest=true, cave_exit=true, bearger_fur=true, watermelonicle=true, moose_nest_fx_idle=true, foliage=true, 
 heatrocklight=true, hawaiianshirt_blueprint=true, trinket_25=true, cave_banana_stump=true, staff_tornado=true, arrowsign_post_placer=true, icepack=true, pottedfern_blueprint=true, wall_moonrock_item_blueprint=true, siestahut_placer=true, depleted_grass=true, butterfly_placer=true, book_birds_blueprint=true, pigskin=true, lavae_move_fx=true, homesign=true, bishop_charge_hit=true, onemanband=true, cookedmonstermeat=true, dug_berrybush2=true, trinket_11=true, dr_warmer_loop=true, cookedmeat=true, trunk_summer=true, trap_teeth_placer=true, slurtlehat=true, homesign_blueprint=true, healingsalve=true, signright=true, cutstone_blueprint=true, teamleader=true, mushtree_small_stump=true, evergreen_short=true, beargervest_blueprint=true, mushtree_tall_bloom_burntfx=true, razor_blueprint=true, turf_woodfloor_blueprint=true, beefalohat_blueprint=true, spidereggsack_blueprint=true, firepit_blueprint=true, cavelight_small=true, icestaff_blueprint=true, lightning_rod_fx=true, blowdart_sleep=true, 
