@@ -1,9 +1,9 @@
 -- information about the mod
 name = "Health Info"
-author = "star, xVars"
+author = "xVars, star"
 forumthread = ""
-version = "2.1.4"
-version_compatible = "2.1.3"
+version = "2.1.6"
+version_compatible = "2.1.6"
 
 local IS_DST = name.utf8len
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
@@ -49,7 +49,7 @@ configuration_options =
             {description = russian and "Оба" or "Both", data = 2, hover = russian and "Паук <100 / 100 100%>" or "Spider <100 / 100 100%>"},
 			(IS_DST
 				and {description = russian and "Разброс" or "Variation", data = 3,
-					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"}
+					hover = russian and "Паук <90 (±10%)>" or "Spider <90 (±10%)>"} 
 				or nil
 			),
         },
@@ -87,7 +87,7 @@ configuration_options =
         name = "unknwon_prefabs",
         label = russian and "Объекты из модов" or "Unknown Objects",
 		hover = russian
-			and "Автоматическое определение наличия здоровья.\Чем больше типов объектов поддерживается, тем меньше совместимость."
+			and "Автоматическое определение наличия здоровья.\nЧем больше типов объектов поддерживается, тем меньше совместимость."
 			or "Automatic detection of unknown objects.\nMore types of objects, less compatibility.",
         options =
         {
@@ -109,7 +109,7 @@ configuration_options =
             {description = russian and "Да" or "Yes", data = true},
             {description = russian and "Нет" or "No", data = false},
         },
-        default = true,
+        default = false,
     },
     {
         name = "random_health_value",

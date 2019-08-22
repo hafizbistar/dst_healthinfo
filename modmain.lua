@@ -254,23 +254,30 @@ if IsServer then
 	function ShowErrorInfo(prefabs) --Show error about prefabs
 		--Show info in log only if message did not sent.
 		print("----------------- HEALTH INFO WARNING ------------------")
-		if (first_message) then print("Please, show this log message to authors of Health Info mod.") end
-		print("Unknown Prefabs: "..tostring(prefabs))
 		if (first_message) then
+			--print("Please, show this log message to authors of Health Info mod.")
+			print('Some objects are not supported by the mod.')
+		end
+		print("Unknown objects: "..tostring(prefabs))
+		if (first_message) then
+			--[[
 			print("The mod should be fixed to support these prefabs.")
 			print("Also you can change settings of the Health Info mod to be more useful but less compatible.")
 			print('If you are mod developer, you can add the tag "healthinfo" to you prefab:')
 			print('inst:AddTag("healthinfo")')
 			print('Add tags before this line: inst.entity:SetPristine()')
 			print('Thanks!')
+			--]]
+			print('You can enable these objects if you change the option "Unknown Objects".')
+			print('See more info at http://steamcommunity.com/workshop/filedetails/discussion/375859599/343787283764426976/')
 			print("--------------------------------------------------------")
 		end
 		--print("--------------------------------------------------------")
 		first_message = false
 	end
-	if send_unknwon_prefabs then
+	if send_unknwon_prefabs then --Happens! This option is already not deprecated :) /
 		local function SendStringToAuthors(s) --Send a string to the web server
-			_G.TheSim:QueryServer("http://dst-translations.1gb.ru/unknown_prefabs.php?"..s, function(result, isSuccessful, resultCode)
+			_G.TheSim:QueryServer("http://h139775.s08.test-hf.su/dst/unknown_prefabs.php?"..s, function(result, isSuccessful, resultCode)
 				if not (isSuccessful and resultCode == 200 and type(result) == "string") then
 					ShowErrorInfo(s)
 				end
@@ -373,11 +380,11 @@ local function debug_log(inst,mess)
 	end
 end
 --]]
-local TheWorld = _G.TheWorld
+local TheWorld
 if _G.TheNet.GetIsMasterSimulation then
 	_G.getmetatable(_G.TheNet).__index.GetIsMasterSimulation = (function()
 		local oldObj = _G.getmetatable(_G.TheNet).__index.GetIsMasterSimulation
-		return function(... )
+		return function(...)
 			TheWorld = _G.TheWorld
 			return oldObj(...)
 		end
