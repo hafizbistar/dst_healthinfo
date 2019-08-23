@@ -2,10 +2,12 @@
 name = "Health Info"
 author = "Nubs, star"
 forumthread = ""
-version = "2.1.6"
-version_compatible = "2.1.6"
+version = "2.1.7"
+local IS_DST = name.utf8len or nil
+if IS_DST then
+	version_compatible = "2.1.6"
+end
 
-local IS_DST = name.utf8len
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
 description = russian and
 	"v"..version.."\nПоказывает индикатор здоровья у всех существ при наведении мыши." or
@@ -25,6 +27,7 @@ dont_starve_compatible = true
 reign_of_giants_compatible = true
 dst_compatible = true
 shipwrecked_compatible = true
+hamlet_compatible = true
 
 --These tags allow the server running this mod to be found with filters from the server listing screen
 server_filter_tags = {"healthinfo"}
@@ -33,7 +36,10 @@ server_filter_tags = {"healthinfo"}
 icon_atlas = "preview.xml"
 icon = "preview.tex"
 
-priority = 0.00375859599 --DST unique id
+priority = -200.00456082189 --DS unique id
+if IS_DST then
+	priority = 0.00375859599 --DST unique id
+end
 
 
 configuration_options =
@@ -70,7 +76,7 @@ configuration_options =
         },
         default = 5,
     },
-    {
+    IS_DST or {
         name = "use_blacklist",
         label = russian and "Чёрный список" or "Use Black List",
 		hover = russian
@@ -83,7 +89,7 @@ configuration_options =
         },
         default = true,
     },
-    {
+    IS_DST or {
         name = "unknwon_prefabs",
         label = russian and "Объекты из модов" or "Unknown Objects",
 		hover = russian
@@ -98,7 +104,7 @@ configuration_options =
         },
         default = 1,
     },
-    {
+    IS_DST or {
         name = "send_unknwon_prefabs",
         label = russian and "Отсылать ошибки" or "Send Error Reports",
 		hover = russian
@@ -111,7 +117,7 @@ configuration_options =
         },
         default = false,
     },
-    {
+    IS_DST or {
         name = "random_health_value",
         label = russian and "Случайное отклонение" or "Chance Fluctuation",
 		hover = russian
@@ -130,7 +136,7 @@ configuration_options =
         },
         default = 0,
     },
-    {
+    IS_DST or {
         name = "random_range",
         label = russian and "Случайность в интервале" or "Randomize Interval",
 		hover = russian
