@@ -2,10 +2,10 @@
 name = "Health Info"
 author = "Nubs, star"
 forumthread = ""
-version = "2.1.7"
-local IS_DST = name.utf8len or nil
+version = "2.1.8"
+local IS_DST = name.utf8len and true or nil
 if IS_DST then
-	version_compatible = "2.1.6"
+	version_compatible = "2.1.8"
 end
 
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
@@ -76,7 +76,7 @@ configuration_options =
         },
         default = 5,
     },
-    IS_DST or {
+    IS_DST and {
         name = "use_blacklist",
         label = russian and "Чёрный список" or "Use Black List",
 		hover = russian
@@ -89,7 +89,7 @@ configuration_options =
         },
         default = true,
     },
-    IS_DST or {
+    IS_DST and {
         name = "unknwon_prefabs",
         label = russian and "Объекты из модов" or "Unknown Objects",
 		hover = russian
@@ -104,7 +104,7 @@ configuration_options =
         },
         default = 1,
     },
-    IS_DST or {
+    IS_DST and {
         name = "send_unknwon_prefabs",
         label = russian and "Отсылать ошибки" or "Send Error Reports",
 		hover = russian
@@ -117,7 +117,7 @@ configuration_options =
         },
         default = false,
     },
-    IS_DST or {
+    IS_DST and {
         name = "random_health_value",
         label = russian and "Случайное отклонение" or "Chance Fluctuation",
 		hover = russian
@@ -136,7 +136,7 @@ configuration_options =
         },
         default = 0,
     },
-    IS_DST or {
+    IS_DST and {
         name = "random_range",
         label = russian and "Случайность в интервале" or "Randomize Interval",
 		hover = russian
