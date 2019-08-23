@@ -1,6 +1,6 @@
 -- information about the mod
 name = "Health Info"
-author = "xVars, star"
+author = "Nubs, star"
 forumthread = ""
 version = "2.1.7"
 local IS_DST = name.utf8len or nil
