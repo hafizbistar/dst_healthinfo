@@ -2,53 +2,8 @@ Shows exact health of creatures on [i]mouse-over[/i] and [i]controller-auto-targ
 Now also in [url=https://github.com/hafizbistar/dst_healthinfo]GitHub[/url].
 
 ================
-[h1]Patchlist[/h1]
-v2.1.7 - Fixed compatibilty for Don't Starve. Now both DST and DS use the same files.
-v2.1.6 (2019)
- - Revived the option for online feedback.
- - Added new prefabs as of August 2019.
-v2.1.5 (2016)
- - Removed option for online feedback.
- - Prefab database is updated on December 29, 2016. This is the last update of database. Use the option "Unknown Objects" if needed.
-v2.1.4
- - Improved some mods compatibility.
-v2.1.3
- - Added tag "epic".
- - Tags "epic" and "largecreature" are included in "Creature" option.
- - Added support of new prefabs.
- - Net_var size changed to 32-bit for some bosses.
-v2.1.5
- - Removed option for online feedback.
- - Prefab database is updated on December 29, 2016. This is the last update of database. Use the option "Unknown Objects" if needed.
-v2.1.4 - Improved some mods compatibility.
-v2.1.3
- - Added tag "epic".
- - Tags "epic" and "largecreature" are included in "Creature" option.
- - Added support of new prefabs.
- - Net_var size changed to 32-bit for some bosses.
-v2.1.0 - Random health variation (for hardcore). Automatic online detection of unknown prefabs (it can be disabled in options). Fast black and white lists by prefab name. Now you can enable/disable some detecting features, it will affect compatibility with your other mods on the server.
-v2.0.7 - API Edition. Add "healthinfo" tag to enable health indicator or add "no_healthinfo" to force disable health indicator. Also there are many accessible functions in modmain.lua. Now you can interact the mod in many ways.
-v2.0.6 - Fixed announces. Fixed ghosts. Fixed skeletons. Fixed almost all potential issues for dedicated servers.
-v2.0.5 - Added cave creatures tags (possibly)
-v2.0.4 - Blacklisted Yamche (Musha's pet).
-v2.0.3 - Removed unused tags.
-v2.0.2 - Added support for cavedweller's prefab.
-v2.0.1 - Fixed divider issue.
-v2.0.0 - Refactoring. Removed component. Changed injection algorithms. Improved compatibility with other mods and future updates of the game. Now mod is more simple and stable. Used cache for initialization, improved speed (less CPU usage). Changed icon size to 128x128 (no more warnings in log file about wrong size).
-v1.4.7 - Added a new option to choose the block style.
-v1.4.6 - Fixed controller crashing issue (recent update)
-v1.4.5 - Added more check tags for other entities that should also display health.
-v1.4.4 - Fixed issues on v1.4.3. Also removed Modes as it doesn't seems to serve any _real_ benefits.
-v1.4.3 - Optimize the mod (now properly check if the entity actually have health before adding the healthinfo).
-v1.4.2 - Add a 'NaN' check before updating health numbers.
-v1.4.1 - Fixed crash issues when trying to plant/build something when using Mode A.
-v1.4.0 - Added support for controller. Also added option to use different Modes.
-v1.3.1 - Fixed crash due to a missing file (i was testing something, sorry).
-v1.3 - Fixed hover message showing incorrectly for certain specific actions (e.g cooking). Added configuration to select either Value or Percentage or Both. And changed the icon :D
-v1.2.1 - Fixed mouse over not showing when equiping on hand slot.
-v1.2 - Fixed clients crashed upon joining a game.
-v1.1 - Fixed Issues when using it with a Language Pack (tested only on Russian LP). Actually this is a rewrite of most of the script (like 50%-70% was modified). But it should has slightly better performance that it was or none at all.
-v1.0 - Released.
+[url=http://steamcommunity.com/sharedfiles/filedetails/changelog/375859599]Patchlist[/url]
+
 ================
 [h1]Credits[/h1]
 star (wrote the v2.0, i am only leeching the credits).
