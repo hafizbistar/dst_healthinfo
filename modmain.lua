@@ -394,7 +394,7 @@ AddPrefabPostInit("world",function(inst)
 	TheWorld = inst
 end)
 
-local boss32bit = { toadstool = true, dragonfly = true,} --Prefabs with over 65535 hp.
+local boss32bit = { toadstool = true, dragonfly = true, toadstool_dark = true, } --Prefabs with over 65535 hp.
 
 --Initialization of all prefabs.
 local net_uint,net_ushortint = _G.net_uint,_G.net_ushortint

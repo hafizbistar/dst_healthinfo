@@ -191,6 +191,32 @@ critter_puppy=true, stovester=true, homura_1=true, winona_infected=true, homura_
 wes_infected=true, wathgrithr_infected=true, wendy_infected=true, webber_infected=true, wx78_infected=true, woodie_infected=true,
 wolfgang_infected=true, wilson_infected=true, quanyecha=true,
 
+--2019/12
+gingerbreadpig=true, squid=true, gingerbreadwarg=true, dyc_wall_hedge_cone=true, mermguard=true, dyc_wall_hedge_block=true,
+dyc_door_hedge_cone=true, mermking=true, thunderbird=true, pangolden=true, kingfisher=true, toucan_hamlet=true,
+tz_nightmare1=true, parrot_blue=true, dungbeetle=true, tz_nightmare2=true, glowfly=true, wurt=true, gnat=true,
+ghosthound3=true, weevole=true, rabid_beetle=true, gingerdeadpig=true, ro_bin=true, cherryling=true, malbatross=true,
+gnarwail=true, cropgnat=true, zeta=true, dyc_door_hedge_block=true, banhua_fireelemental=true, giantgrub=true,
+scarlia_ghost=true, cropgnat_infester=true, catbird=true, cherry_dragonfly=true, cherry_bee=true, glowfly_cocoon=true,
+leshahound=true, hippopotamoose=true, octopus=true, red_lycoris_td1madao_chester_1=true, cherry_beehive=true, chaffinch=true,
+frog_traveler=true, boarmound=true, oxbaby=true, swimminghorror=true, boatmetal=true, lafy=true, abigail_human=true,
+dollattackerrazor=true, giao2=true, sandspike_med_legion=true, boat_encrusted=true, sandspike_tall_legion=true,
+pigman_miner=true, crocodog=true, sandspike_short_legion=true, houndmound_fire=true, fruitdragonfly=true, frog_poison=true,
+houndmound_slimey=true, yuanzi=true, pigelitefighter3=true, wanawanatiki=true, goldbishop=true, pigman_royalguard_3=true,
+pigelitefighter1=true, dolllumber=true, sona_etwahl=true, boat_armoured=true, pugalisk=true, spider_ape=true, dollattacker=true,
+pugalisk_body=true, gnarwail_attack_horn=true, bone_pet=true, pugalisk_tail=true, antman_warrior_egg=true, skill_2_fx=true,
+sharx=true, alice_th=true, white_bone=true, hound_slimey=true, sona=true, apple=true, zeb=true, riven2_dst_td1madao_mengxin=true,
+poisoncrocodog=true, nohatty_piggy_tfc=true, neza=true, pigelitefighter4=true, kelpy=true, dolldigger=true, koishi=true,
+rock_basaltp=true, warfarin=true, merm1=true, critter_perdling=true, pigelitefighter2=true, trapslug=true, packim=true,
+ghost_fili=true, ds_knight=true, essar=true, monkey_king=true, snapdragon=true, pidgeonp=true, beetletaurp=true,
+ike=true, lograft=true, peekhen=true, pig_royalguard_rich_2=true, pig_royalguard_rich=true, tikiman=true, pigman_royalguard_2=true,
+golem=true, frog_poison2=true, wyrd=true, genji=true, ancient_hulk=true, ancient_herald=true, slip=true, merm2=true,
+pirateghost=true, battlestandard_shield=true, pugaliskp_body=true, shadowchannelerp=true, saxton=true, starfire=true,
+gril=true, ds_cleric=true, yoshi=true, mysteryguard=true, thief_ds=true, sandbagsmall=true, koli=true, illya_mahoo=true,
+pugaliskp_tail=true, ezreal_dst_td1madao=true, des_water_snake=true, followerdoll=true, pitpig=true, snortoise=true,
+shadow_deerclops=true, shadowtentacle_root=true, goldmonkey=true, gw_frostobstacle=true,
+
+
 }
 
 
