@@ -1,3 +1,10 @@
+v2.2.01 (2021/09)
+ - Added new prefabs to white list as of September 2021.
+
+v2.2.00 (2019/12)
+ - Added "toadstool_dark" as 32bit-health monster.
+ - Added new prefabs to white list as of December 2019.
+
 v2.1.6 (2019)
  - Revived the option for online feedback.
  - Added new prefabs as of August 2019.
