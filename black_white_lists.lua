@@ -322,6 +322,18 @@ senjuro=true, satori=true, warbucks=true, manutsawee=true, heraldp=true, yehui=t
 thunderbirdp=true, pangoldenp=true, toadstool_forest=true, papyrus_ghost=true, krownbig=true, kageminer=true, kageduelist=true,
 lureplague_rat=true, kemomimi=true, spidermonkey2p=true, whimsy=true, peagawkp=true, gnarwail_attack_hornunderwater=true,
 kemomimi_enemy=true, billp=true, kemomimi_npc_webber=true, trails=true, gnarwailp=true,
+
+--2021/10
+ghost_irritated=true, puppet=true, koma35p=true, xxx3_killerbutterfly=true, xxx3_eyeplant_3=true, ghost_clement=true,
+mutantbarrack=true, zhongli=true, block_stone=true, warpspace=true, warpspacea=true, kemomimi_build_pig=true, medal_bee=true,
+kemomimi_npc_warly=true, xxx3_eyeplant_4=true, xxx3_eyeplant_1=true, walrus_npc=true, little_walrus_npc=true, medal_beequeen=true,
+medal_beeguard=true, eyeofterror=true, eyeofterror_mini_grounded=true, smile=true, kemomimi_npc_winona=true, eyeofterror_mini=true,
+lux=true, xxx3_eyeplant_2=true, iexplorer=true, archive_centipede_huskp=true, peghook=true, shadowrabbit=true,
+turtillus=true, medal_rose_terrace=true, gordon_ramsay=true, kemomimi_npc_wickerbottom=true, twinofterror1=true,
+kemomimi_npc_kemomimi=true, twinofterror2=true, kemomimi_boss_dragon_bai=true, irys_hope=true, williambuster=true,
+wall_cherryflower=true, battlestandard_damagerp=true, williambutler=true, jaye=true, kemomimi_npc_waxwell=true,
+kemomimi_npc_wendy=true, williambutler_empty=true, williambrute=true, williambuster_empty=true, shirogane=true,
+ghrazor=true, asakiri=true,
 }
 
 

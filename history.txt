@@ -1,3 +1,7 @@
+v2.2.02 (2021/09)
+ - Fixed incompatibility with some mods.
+ - Added new prefabs to white list as of October 2021.
+
 v2.2.01 (2021/09)
  - Added new prefabs to white list as of September 2021.
 

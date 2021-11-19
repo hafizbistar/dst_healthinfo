@@ -468,7 +468,13 @@ InjectFull(health,"SetMaxHealth",function(aaa,self)
 		self.inst.net_health_info_max:set(self.maxhealth)
 	end
 end)
-InjectFull(health,"DoDelta",function(aaa,self)
+--[[InjectFull(health,"DoDelta",function(aaa,self)
+	if self.inst.health_info ~= nil then
+		self.inst.net_health_info:set(self.currenthealth)
+	end
+	return aaa
+end)--]]
+InjectFull(health,"SetVal",function(aaa,self)
 	if self.inst.health_info ~= nil then
 		self.inst.net_health_info:set(self.currenthealth)
 	end

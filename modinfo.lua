@@ -2,10 +2,10 @@
 name = "Health Info"
 author = "Nubs, star"
 forumthread = ""
-version = "2.2.01"
+version = "2.2.02"
 local IS_DST = name.utf8len and true or nil
 if IS_DST then
-	version_compatible = "2.2.01"
+	version_compatible = "2.2.02"
 end
 
 russian = IS_DST and (russian or (language == "ru")) --Переменная utf8len определена только c поддержкой UTF
