@@ -58,6 +58,9 @@ end
 local function InjectFull(comp,fn_name,fn)
 	--print("Full Inject: ",tostring(comp),tostring(fn_name),tostring(fn))
 	local old_fn = comp[fn_name]
+	if not old_fn then
+		return print('ERROR: Impossible to make injection into function ' .. fn_name)
+	end
 	t["old_"..fn_name] = old_fn --Saving and publishing all old functions. Someone may need it.
 	comp[fn_name] = function(self,...)
 		local res = old_fn(self,...)
@@ -468,12 +471,12 @@ InjectFull(health,"SetMaxHealth",function(aaa,self)
 		self.inst.net_health_info_max:set(self.maxhealth)
 	end
 end)
---[[InjectFull(health,"DoDelta",function(aaa,self)
+InjectFull(health,"DoDelta",function(aaa,self) -- works if some mod overrides it entirely
 	if self.inst.health_info ~= nil then
 		self.inst.net_health_info:set(self.currenthealth)
 	end
 	return aaa
-end)--]]
+end)
 InjectFull(health,"SetVal",function(aaa,self)
 	if self.inst.health_info ~= nil then
 		self.inst.net_health_info:set(self.currenthealth)
